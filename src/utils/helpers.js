@@ -6,6 +6,7 @@ export function formatDate (timestamp) {
   
   export function formatQuestion (optionOneText, optionTwoText, authedUser) {
     const { name, avatarURL } = authedUser
+      // TBD: Is authedUser the whole user or just the ID?
   
     return {
       id,
