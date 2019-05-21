@@ -6,6 +6,7 @@ import {
   } from './_DATA.js'
   
   export function getInitialData () {
+    console.log ("api: getInitialData")
     return Promise.all([
       _getUsers(),
       _getQuestions(),

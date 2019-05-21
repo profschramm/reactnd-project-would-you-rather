@@ -4,6 +4,7 @@ export default function users (state = {}, action) {  // Default arg to init sto
                                                      // Alternative: createStore() function
     switch (action.type) {
         case GET_USERS :
+            console.log ("actions:users")
             return {
                 ...state,       // The rest of the state
                 ...action.users // The new user info from the action

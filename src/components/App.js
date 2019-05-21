@@ -1,31 +1,41 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import {BrowserRouter as Router, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 import LoadingBar from 'react-redux-loading'
 import {handleInitialData} from '../actions/shared'
 import '../App.css';
+import LoginPage from './LoginPage'
 
 class App extends Component {
 
-  componentDidMatch() {
+  componentDidMount() {
+    console.log ("App: componentDidMount")
     this.props.dispatch(handleInitialData)
   }
 
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <p>
-            Welcome to Would-You-Rather?
-          </p>
-        </header>
-        <div>
-        Please log in
-        </div>
+      <Router>
+        <Fragment>
+          <LoadingBar />
+            <div className="App">
+              <h3 className="App-header">
+                Would-You-Rather?
+              </h3>
+              {this.props.loading === true
+                ? null
+                : <div>
+                   <Route path='/' exact component={LoginPage} />
+                </div>
+              }
+            <div>
+          </div>
       </div>
+        </Fragment>
+      </Router>
+      
     );
   }
-  
 }
 
 function mapStateToProp({authedUser}) {
