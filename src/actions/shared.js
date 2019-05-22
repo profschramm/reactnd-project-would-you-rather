@@ -1,4 +1,4 @@
-import {getInitialData} from '../utils/api'
+import {getInitialData, saveQuestionAnswer} from '../utils/api'
 import {getUsers} from '../actions/users'
 import {getQuestions} from '../actions/questions'
 import {setAuthedUser} from '../actions/authedUser'
@@ -21,3 +21,19 @@ export function handleInitialData() {
             })
     }
 }
+
+export function handleSaveQuestionAnswer( {questionId, selectedOption, authedUser}) {
+    console.log ("shared:handleSaveQuestionAnswer")
+    return (dispatch) => {
+        dispatch(showLoading())
+        return saveQuestionAnswer()
+            .then (({users, questions}) => {
+                console.log ("shared:handleInitialData:then")
+                dispatch(getUsers(users))
+                dispatch(getQuestions(questions))
+                dispatch(setAuthedUser(AUTHED_ID))
+                dispatch(hideLoading())
+            })
+    }
+}
+

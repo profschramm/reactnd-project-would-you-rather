@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-class LoginPage extends Component {
+class Leaderboard extends Component {
 
     state = {
         selectedUser: null,
@@ -55,21 +55,23 @@ class LoginPage extends Component {
         // dispatch( setAuthedUser )
     }
     render() {
-        console.log("LoginPage:render -Number of users", this.state.users.length)
+        console.log("Leaderboard:render -Number of users", this.state.users.length)
         return (
             <div>
-                <h3 className='center'> Welcome. Please login</h3>
-                <select className='login-select' onChange={this.handleSelect}>
-                    {this.state.users.map((user) => (
-                        <option key={user.id} value={user.name}>
-                            {user.name}
-                        </option>
-                    ))}
-                </select>
-                <button className='logging-in' onClick={(e) => this.handleLogin(e)}>
-                    Login
-                </button>
-
+                {this.state.users.map((user) => (
+                    <ul className='leaderboard-list'>
+                        <li>
+                            <div>
+                                <label>Avatar</label>
+                             </div>
+                            <div>
+                                <h2>{user.name}</h2>
+                                <p>Answered Questions {user.answers.length}</p>
+                                <p>Created Questions {user.questions.length}</p>              
+                            </div>
+                        </li>
+                    </ul>
+                ))}
             </div>
         )
     }
@@ -81,9 +83,4 @@ function mapStateToProps({ users }) {
             .sort((a,b) => users[b].id - users[a].id)
     }
 }
-export default connect(mapStateToProps)(LoginPage)
-
-/*
-  If you want the selection of an item to cause an action:  <select className='login-select' onChange={this.props.handleLogin}>
-
- */
+export default connect(mapStateToProps)(Leaderboard)

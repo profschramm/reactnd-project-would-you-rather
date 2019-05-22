@@ -1,24 +1,24 @@
+import QuestionPage from "../components/QuestionPage";
+
 export function formatDate (timestamp) {
     const d = new Date(timestamp)
     const time = d.toLocaleTimeString('en-US')
     return time.substr(0, 5) + time.slice(-2) + ' | ' + d.toLocaleDateString()
   }
   
-  export function formatQuestion (optionOneText, optionTwoText, authedUser) {
-    const { name, avatarURL } = authedUser
-      // TBD: Is authedUser the whole user or just the ID?
-  
+  export function formatQuestion (question, askingUser) {
+    const {id, author, timestamp, optionOne, optionTwo} = question 
     return {
       id,
-      author: name,
+      author: askingUser,
       timestamp,
       optionOne: {
         votes:[],
-        text: optionOneText
+        text: optionOne
       },
       optionTwo: {
         votes:[],
-        text: optionTwoText
+        text: optionTwo
       },
     }
   }
