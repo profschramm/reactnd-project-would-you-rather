@@ -18,8 +18,9 @@ class App extends Component {
   }
 
   render() {
-
+    console.log ("App: render -", this.props)
     return (
+      
       <Router>
         <Fragment>
           <LoadingBar />

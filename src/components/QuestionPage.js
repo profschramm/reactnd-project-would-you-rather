@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
-import { formatQuestion, formatDate } from '../utils/helpers'
+// import { formatQuestion, formatDate } from '../utils/helpers'  (formatQuestion is private within DATA.js)
 import { handleSaveQuestionAnswer } from '../actions/shared'
 import { Link, withRouter } from 'react-router-dom'
 
@@ -36,13 +36,14 @@ class QuestionPage extends Component {
     handleSubmit = (e) => {
         e.preventDefault()
         const { dispatch, question, authedUser } = this.props
-/*
+
         dispatch(handleSaveQuestionAnswer( {
+            authedUser,
             questionId: question.id,
             selectedOption: this.state.selectedOption,
-            authedUser,
+
         }))
-*/
+
         // Redirect to parent QuestionAnswerPage
         // this.props.history.push(`/questionAnswer/${id}`)
         this.props.history.push(`/questionAnswer/`)
@@ -120,9 +121,11 @@ function mapStateToProps({authedUser, users, questions}, {id}) {
   
     return {
         authedUser,
+        /*
         question: question
             ? formatQuestion(question, users[question.author], authedUser)
             : null
+             */
     }
 }
 

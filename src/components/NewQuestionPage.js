@@ -10,7 +10,6 @@ class NewQuestionPage extends Component {
         optionTwo: '',
         toHome: false,
     }
-
     handleChangeOptionOne = (e) => {
         const optionOne = e.target.value
         this.setState( () => ( {
@@ -23,15 +22,12 @@ class NewQuestionPage extends Component {
             optionTwo
         }))
     }
-
     handleSubmit = (e) => {
         e.preventDefault()
         const { optionOne, optionTwo } = this.state
         const { dispatch, id } = this.props
         
-        // todo : Add Question to Store
         dispatch( handleAddQuestion(optionOne, optionTwo, id))
-
         console.log('New question: ', optionOne, optionTwo, id)
 
         this.setState( () => ({

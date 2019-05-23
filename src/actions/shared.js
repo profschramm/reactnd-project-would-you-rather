@@ -22,11 +22,11 @@ export function handleInitialData() {
     }
 }
 
-export function handleSaveQuestionAnswer( {questionId, selectedOption, authedUser}) {
+export function handleSaveQuestionAnswer( {authedUser, questionId, selectedOption }) {
     console.log ("shared:handleSaveQuestionAnswer")
     return (dispatch) => {
         dispatch(showLoading())
-        return saveQuestionAnswer()
+        return saveQuestionAnswer( {authedUser, questionId, selectedOption})
             .then (({users, questions}) => {
                 console.log ("shared:handleInitialData:then")
                 dispatch(getUsers(users))

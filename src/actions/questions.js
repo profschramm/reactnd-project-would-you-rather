@@ -19,10 +19,10 @@ export function handleAddQuestion (optionOne, optionTwo, id) {
         const { authedUser } = getState()
 
         dispatch (showLoading())
-        return saveQuestion( {          // Should I call formatQuestion here?
+        return saveQuestion( {          
                 optionOne,
                 optionTwo,
-                author: authedUser,
+                author: id,   // Or should it be authedUser,
         })
             .then( (question) => dispatch(addQuestion(question)))
             .then( () => dispatch(hideLoading()))

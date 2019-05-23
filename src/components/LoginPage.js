@@ -55,7 +55,8 @@ class LoginPage extends Component {
         // dispatch( setAuthedUser )
     }
     render() {
-        console.log("LoginPage:render -Number of users", this.state.users.length)
+        // console.log("LoginPage:render -Number of users", this.state.users.length)
+        console.log("LoginPage: render ", this.props)
         return (
             <div>
                 <h3 className='center'> Welcome. Please login</h3>
@@ -84,6 +85,7 @@ function mapStateToProps({ users }) {
 export default connect(mapStateToProps)(LoginPage)
 
 /*
-  If you want the selection of an item to cause an action:  <select className='login-select' onChange={this.props.handleLogin}>
+  If you want the selection of an item to cause an action: 
+   <select className='login-select' onChange={this.props.handleLogin}>
 
  */
