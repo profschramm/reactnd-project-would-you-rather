@@ -51,6 +51,9 @@ class QuestionPage extends Component {
 
     render() {
         const { question, users } = this.props    
+        // use React Router to get the passed qid
+
+
 /*
         if (question === null) {
             return <p> This question does not exist. 404 page</p>
@@ -104,7 +107,7 @@ class QuestionPage extends Component {
                         </div>
                      
                         <button 
-                            className='submit-answer' 
+                            className='btn' 
                             type="submit"
                             onClick={(e) => this.handleSubmit(e)}>
                             SUBMIT
@@ -116,18 +119,24 @@ class QuestionPage extends Component {
     }   
 }
 
-function mapStateToProps({authedUser, users, questions}, {id}) {
-    const question = questions[id]
-  
-    return {
+function mapStateToProps({authedUser, users, questions}, {match}) {
+    // 1st param: state, 2nd param: component's props
+    // Parent component is React Router which is passing a prop called match
+
+    const question_id = match.params.question_id
+    // Reference: https://reacttraining.com/react-router/web/example/url-params
+    const question = questions[question_id]
+        // Could be undefined!! ERROR! TBD
+        // Possibly a flag to be passed to render, true or false
+      return {
         authedUser,
-        /*
-        question: question
-            ? formatQuestion(question, users[question.author], authedUser)
-            : null
-             */
+        question
     }
 }
 
 export default withRouter(connect(mapStateToProps)(QuestionPage))
 
+/*
+  ? formatQuestion(question, users[question.author], authedUser)
+            : null
+             */

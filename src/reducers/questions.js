@@ -8,11 +8,11 @@ export default function questions (state = {}, action) {  // Default arg to init
                 ...state,       // The rest of the state
                 ...action.questions 
             }
-        case ADD_QUESTION:      // TBD: Eduardo: Syntax to init votes to []
+        case ADD_QUESTION:      
             const { question } = action
             return {
                 ...state,
-                [action.question.id]: action.question,
+                [question.id]: question,  // [] means value of variable as key for this entry
             }
         default:
             return state

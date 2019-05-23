@@ -48,7 +48,8 @@ class NewQuestionPage extends Component {
         return (
             <div>
                 <h3 className='center'> Compose a new Question</h3>
-                <form className='new-question' onSubmit={this.handleSubmit}>
+                <form className='question' onSubmit={this.handleSubmit}>
+                    <p>Would you rather</p>
                     <textarea   
                         placeholder = "Option One"
                         value = {optionOne}
@@ -61,6 +62,7 @@ class NewQuestionPage extends Component {
                             {optionOneLeft}
                         </div>
                     )}
+                    <p>OR</p>
                     <textarea   
                         placeholder = "Option Two"
                         value = {optionTwo}

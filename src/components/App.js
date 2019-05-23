@@ -14,7 +14,7 @@ class App extends Component {
 
   componentDidMount() {
     console.log ("App: componentDidMount")
-    this.props.dispatch(handleInitialData)
+    this.props.dispatch(handleInitialData())
   }
 
   render() {
@@ -24,14 +24,14 @@ class App extends Component {
       <Router>
         <Fragment>
           <LoadingBar />
-          <div className="App">
-            <h3 className="App-header">
+          <div className='container'>
+            <h3 className='heading'>
               Would-You-Rather?
             </h3>
             <div>
                  <Route path='/' exact render={ () => (<LoginPage />)}/>
                  <Route path='/add' render={ () => (<NewQuestionPage />)}/>
-                 <Route path='/question' render={ () => (<QuestionPage />)}/>
+                 <Route path='/question/:question_id' render={ () => (<QuestionPage />)}/>
                  <Route path='/questionAnswer' render={ () => (<QuestionAnswerPage />)}/>
                  <Route path='/leaderboard' render={ () => (<Leaderboard />)}/>
             </div>

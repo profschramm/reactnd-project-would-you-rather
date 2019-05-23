@@ -41,20 +41,10 @@ class Leaderboard extends Component {
          }
         ]
        }
-     
-    handleSelect = (e) => {
-        console.log ("LoginPage:handleChange", e.target.value)
-        e.preventDefault()
-        this.setState({selectedUser:e.target.value})
-    }
-    handleLogin = (e) => {
-        e.preventDefault()
-        // const selectedUser = document.getElementById('login-select')
-        console.log ("LoginPage: handleLogin", this.state.selectedUser)
-        //console.log ("LoginPage: handleLogin", selectedUser.value)
-        // dispatch( setAuthedUser )
-    }
+   
     render() {
+        const { users } = this.props
+        console.log("Leaderboard: render - props", this.props.users)
         console.log("Leaderboard:render -Number of users", this.state.users.length)
         return (
             <div>

@@ -16,7 +16,7 @@ export function handleInitialData() {
                 console.log ("shared:handleInitialData:then")
                 dispatch(getUsers(users))
                 dispatch(getQuestions(questions))
-                dispatch(setAuthedUser(AUTHED_ID))
+                dispatch(setAuthedUser(null))   // 
                 dispatch(hideLoading())
             })
     }
@@ -31,7 +31,7 @@ export function handleSaveQuestionAnswer( {authedUser, questionId, selectedOptio
                 console.log ("shared:handleInitialData:then")
                 dispatch(getUsers(users))
                 dispatch(getQuestions(questions))
-                dispatch(setAuthedUser(AUTHED_ID))
+                // dispatch(setAuthedUser(AUTHED_ID))
                 dispatch(hideLoading())
             })
     }
