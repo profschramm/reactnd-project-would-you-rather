@@ -16,19 +16,16 @@ function addQuestion (question) {   // Should I export?? Not for optimistic-upda
 
 export function handleAddQuestion (optionOne, optionTwo, id) {
     return (dispatch, getState) => {
-        const { authedUser } = getState()
-
         dispatch (showLoading())
         return saveQuestion( {          
                 optionOne,
                 optionTwo,
-                author: id,   // Or should it be authedUser,
+                author: id,   // Or should it be authedUser from the store?
         })
             .then( (question) => dispatch(addQuestion(question)))
             .then( () => dispatch(hideLoading()))
     }
 }
-
 
 export function getQuestions( questions ) {
     return {
@@ -36,3 +33,6 @@ export function getQuestions( questions ) {
         questions,
     }
 }
+
+
+

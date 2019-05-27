@@ -10,7 +10,6 @@ export function handleInitialData() {
     console.log ("shared:handleInitialData")
     return (dispatch) => {
         dispatch(showLoading())
-        console.log ("dispatching")
         return getInitialData()
             .then (({users, questions}) => {
                 console.log ("shared:handleInitialData:then")
@@ -31,7 +30,7 @@ export function handleSaveQuestionAnswer( {authedUser, questionId, selectedOptio
                 console.log ("shared:handleInitialData:then")
                 dispatch(getUsers(users))
                 dispatch(getQuestions(questions))
-                // dispatch(setAuthedUser(AUTHED_ID))
+                // dispatch(setAuthedUser(authedUser))      // Don't need. Only users and questions changed
                 dispatch(hideLoading())
             })
     }

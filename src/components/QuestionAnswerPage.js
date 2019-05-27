@@ -3,26 +3,9 @@ import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
 
 class QuestionAnswerPage extends Component { 
-
-    state = {
-        fakeQuestion:  {
-              id: '8xf0y6ziyjabvozdd253nd',
-              author: 'sarahedo',
-              timestamp: 1467166872634,
-              optionOne: {
-                votes: ['sarahedo'],
-                text: 'have horrible short term memory',
-              },
-              optionTwo: {
-                votes: [],
-                text: 'have horrible long term memory'
-              }
-        }
-    }
-
     
     render() {
-        const { question } = this.props    
+        const { question, authedUser } = this.props    
 /*
         if (question === null) {
             return <p> This question does not exist. 404 page</p>
@@ -33,21 +16,38 @@ class QuestionAnswerPage extends Component {
 */
         const avatarURL="https://tylermcginnis.com/would-you-rather/tyler.jpg"
         const name = "Tyler"
-
-        const dummy = this.state.fakeQuestion
+/*
+        const dummy = this.prop.question
         console.log ("dummy ", dummy)
         const totalVotes = 
-            this.state.fakeQuestion.optionOne.votes.length +
-            this.state.fakeQuestion.optionTwo.votes.length   
+            this.props.question.optionOne.votes.length +
+            this.props.question.optionTwo.votes.length   
         
-        const percentOne = (this.state.fakeQuestion.optionOne.votes.length / totalVotes) * 100
-        const percentTwo = (this.state.fakeQuestion.optionTwo.votes.length / totalVotes) * 100
-        
+        const percentOne = (this.props.question.optionOne.votes.length / totalVotes) * 100
+        const percentTwo = (this.props.question.optionTwo.votes.length / totalVotes) * 100
+        */
         return (
+            <div>
+               QUESTION ANSWER PAGE
+            </div>
+        )
+    }   
+}
+
+// URL Reference on mapStateToProps with arguments: https://react-redux.js.org/using-react-redux/connect-mapstate
+
+function mapStateToProps({questions}, {qid}) {
+    const question = questions[qid]
+return {question}
+}
+
+export default withRouter(connect(mapStateToProps)(QuestionAnswerPage))
+
+/*
             <div>
                 <img
                     src= {avatarURL}
-                    alt= {'Avatar of ${fakeQuestion.author}'}            
+                    alt= {`Avatar of ${this.prop.question.author}`}            
                     className='avatar'
                 />  
                 <div className='results-info'>
@@ -55,30 +55,16 @@ class QuestionAnswerPage extends Component {
                         <span> Asked by {name}</span>
                         <div>
                             <h2>Results</h2>
-                            <p>Would you rather {this.state.fakeQuestion.optionOne.text} ?</p>
-                            <p>{this.state.fakeQuestion.optionOne.votes.length} out of {totalVotes}</p>
+                            <p>Would you rather {this.prop.question.optionOne.text} ?</p>
+                            <p>{this.prop.question.optionOne.votes.length} out of {totalVotes}</p>
                             <input type="range" min="0" max="100" value={percentOne}/>
                         </div>
                         <div>
-                            <p>Would you rather {this.state.fakeQuestion.optionTwo.text} ?</p>
-                            <p>{this.state.fakeQuestion.optionTwo.votes.length} out of {totalVotes}</p>
+                            <p>Would you rather {this.prop.question.optionTwo.text} ?</p>
+                            <p>{this.props.question.optionTwo.votes.length} out of {totalVotes}</p>
                             <input type="range" min="0" max="100" value={percentTwo}/>
                         </div>
                     </div>             
                 </div>
             </div>
-        )
-    }   
-}
-
-function mapStateToProps({questions}, {id}) {
-    const question = questions[id]
-  
-    return {
-        // Don't understand
-        question: null
-    }
-}
-
-export default withRouter(connect(mapStateToProps)(QuestionAnswerPage))
-
+            */
