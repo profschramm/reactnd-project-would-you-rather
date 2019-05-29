@@ -12,6 +12,14 @@ import QuestionAnswerPage from './QuestionAnswerPage'
 import Leaderboard from './Leaderboard'
 import Nav from './Nav'
 
+
+// Attribution URL: https://medium.com/@leonardobrunolima/react-tips-handling-404-pages-24d27191a8dd
+const Page404 = ({location}) => (
+  <div>
+    <h2>No match found for <code>{location.pathname}</code></h2>
+  </div>
+)
+
 class App extends Component {
 
   componentDidMount() {
@@ -24,21 +32,25 @@ class App extends Component {
     return (
       // URL on Switch versus Router: https://medium.com/@jenniferdobak/react-router-vs-switch-components-2af3a9fc72e
       // URL on Lesson on Basic Components of React Router: https://reacttraining.com/react-router/web/guides/basic-components
+      // URL on Nested Routes but does not work: https://tylermcginnis.com/react-router-nested-routes/
+        // I want <Nav> only within the Switch (on all pages, except /login) .. But it does not work
       <div className="app">
         <LoadingBar />
         <h3 className='heading'>
           Would-You-Rather?
         </h3>
         <Router>
-          <Switch>
-              <Route path='/' exact render={ ( {history}) => (<LoginPage />)}/>
-
-              <Route path='/home' render={ () => (<HomePage />)}/>
-              <Route path='/add' render={ () => (<NewQuestionPage />)}/>
+          <div>
+            <Switch>
+              <Route path='/' exact render={ ( {history}) => (<HomePage />)}/>
+              <Route path='/add' exact render={ () => (<NewQuestionPage />)}/>
               <Route path='/question/:question_id' render={ () => (<QuestionPage />)}/>
               <Route path='/questions/:question_id' render={ () => (<QuestionAnswerPage />)}/>
-              <Route path='/leaderboard' render={ () => (<Leaderboard />)}/>
-           </Switch>
+              <Route path='/leaderboard' exact render={ () => (<Leaderboard />)}/>
+              <Route compoment={Page404}/>
+          </Switch>
+          </div>
+          <Route path='/login' exact render={ ( {history}) => (<LoginPage />)}/>
         </Router>
       </div>    
     );

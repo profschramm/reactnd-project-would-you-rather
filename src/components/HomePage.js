@@ -1,14 +1,7 @@
-import React, {Component, Fragment} from 'react';
-import {BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import React, {Component} from 'react';
 import { connect } from 'react-redux'
-import LoadingBar from 'react-redux-loading'
 import '../App.css';
 import Nav from './Nav'
-import { Redirect } from 'react-router-dom'
-import NewQuestionPage from './NewQuestionPage'
-import QuestionPage from './QuestionPage'
-import QuestionAnswerPage from './QuestionAnswerPage'
-import Leaderboard from './Leaderboard'
 import QuestionList from './QuestionList'
 
 class HomePage extends Component {
@@ -23,8 +16,7 @@ class HomePage extends Component {
     return (
       <div>
           <Nav username={this.props.authedUser}/>
-          <QuestionList/>
-          
+          <QuestionList/>  
        </div>
 
     );

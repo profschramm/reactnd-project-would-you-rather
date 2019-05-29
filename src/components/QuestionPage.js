@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import { handleSaveQuestionAnswer } from '../actions/shared'
 import { Link, withRouter } from 'react-router-dom'
+import Nav from './Nav'
 
 class QuestionPage extends Component { 
 
@@ -55,6 +56,7 @@ class QuestionPage extends Component {
         const optionTwo = "Two"
         return (
             <div>
+                <Nav username={this.props.authedUser}/>
                 <img
                     src= {avatarURL}
                     alt= {`Avatar of ${name}`}            

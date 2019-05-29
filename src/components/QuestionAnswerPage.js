@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
 import { convertToArray } from '../utils/helpers';
+import Nav from './Nav'
 
 class QuestionAnswerPage extends Component { 
     
@@ -35,6 +36,7 @@ class QuestionAnswerPage extends Component {
         */
         return (
             <div>
+                <Nav username={authedUser}/>
                QUESTION ANSWER PAGE
             </div>
         )

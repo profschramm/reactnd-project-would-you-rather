@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { convertToArray } from '../utils/helpers';
+import Nav from './Nav'
 
 class Leaderboard extends Component {
     state = {
@@ -14,6 +15,7 @@ class Leaderboard extends Component {
         console.log("Leaderboard: render - props", this.props.users)
         return (
             <div>
+                <Nav username={this.props.authedUser}/>
                 <ul className='leaderboard-list'>
                     {users.map((user) => (
                        <li key={user.id}>
@@ -39,9 +41,10 @@ class Leaderboard extends Component {
     }
 }
 
-function mapStateToProps({ users }) {
+function mapStateToProps({ users, authedUser }) {
     return {
-        users: convertToArray(users)
+        users: convertToArray(users),
+        authedUser
     }
 }
 export default connect(mapStateToProps)(Leaderboard)

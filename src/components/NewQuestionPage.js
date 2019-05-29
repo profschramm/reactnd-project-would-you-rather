@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { handleAddQuestion } from '../actions/questions'
 import { Redirect } from 'react-router-dom'
+import Nav from './Nav'
 
 class NewQuestionPage extends Component {
 
@@ -47,6 +48,7 @@ class NewQuestionPage extends Component {
         const optionTwoLeft = 280- optionTwo.length
         return (
             <div>
+                <Nav username={this.props.authedUser}/>
                 <h3 className='center'> Compose a new Question</h3>
                 <form className='question' onSubmit={this.handleSubmit}>
                     <p>Would you rather</p>
@@ -88,4 +90,11 @@ class NewQuestionPage extends Component {
     }
 }
 
-export default connect()(NewQuestionPage)
+
+function mapStateToProps({ authedUser }) {
+    return {
+        authedUser
+    }
+}
+export default connect(mapStateToProps)(NewQuestionPage)
+
