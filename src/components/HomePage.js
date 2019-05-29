@@ -11,10 +11,6 @@ import QuestionAnswerPage from './QuestionAnswerPage'
 import Leaderboard from './Leaderboard'
 import QuestionList from './QuestionList'
 
-
-export const ANSWERED_QUESTIONS = "Answered Questions"
-export const UNANSWERED_QUESTIONS = "Unanswered Questions"
-
 class HomePage extends Component {
 
   state = {

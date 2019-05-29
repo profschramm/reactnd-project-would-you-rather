@@ -12,7 +12,6 @@ class QuestionContainer extends Component {
         viewDetails: PropTypes.func.isRequired,
         viewDetailsURL: PropTypes.string.isRequired
     }
-
     
     filterAnsweredQuestions = (questions, users, author) => {
         const userInfo = users.filter( (user) => (
@@ -37,16 +36,12 @@ class QuestionContainer extends Component {
     render() {
         const { questions, users, authedUser } = this.props    // TBD: Add users, to get the avatarURL
         //console.log ("QuestionContainer:render", this.props.viewDetailsURL, authedUser, questions)
-    /*
-        let username = null
+    
         if (authedUser === null) {  // Temporary until I figure out why authedUser is not set
-            username = authedUser
-        } else {
-            username = "sarahedo"
-        }
-    */
-        let username = "sarahedo"
-        const questionArray = this.filterAnsweredQuestions(questions, users, username)
+            return <p> The user is not logged on</p>
+            
+        } 
+        const questionArray = this.filterAnsweredQuestions(questions, users, authedUser)
 
         return (
             <div className="container">
