@@ -10,6 +10,7 @@ import NewQuestionPage from './NewQuestionPage'
 import QuestionPage from './QuestionPage'
 import QuestionAnswerPage from './QuestionAnswerPage'
 import Leaderboard from './Leaderboard'
+import Nav from './Nav'
 
 class App extends Component {
 
@@ -17,6 +18,43 @@ class App extends Component {
     console.log ("App: componentDidMount")
     this.props.dispatch(handleInitialData())
   }
+
+  render() {
+    console.log ("App: render -", this.props)
+    return (
+      // URL on Switch versus Router: https://medium.com/@jenniferdobak/react-router-vs-switch-components-2af3a9fc72e
+      // URL on Lesson on Basic Components of React Router: https://reacttraining.com/react-router/web/guides/basic-components
+      <div className="app">
+        <LoadingBar />
+        <h3 className='heading'>
+          Would-You-Rather?
+        </h3>
+        <Router>
+          <Switch>
+              <Route path='/' exact render={ ( {history}) => (<LoginPage />)}/>
+              <Route path='/home' render={ () => (<HomePage />)}/>
+              <Route path='/add' render={ () => (<NewQuestionPage />)}/>
+              <Route path='/question/:question_id' render={ () => (<QuestionPage />)}/>
+              <Route path='/answers' render={ () => (<QuestionAnswerPage />)}/>
+              <Route path='/leaderboard' render={ () => (<Leaderboard />)}/>
+           </Switch>
+        </Router>
+      </div>    
+    );
+  }
+}
+
+function mapStateToProp({users}) {
+  return {
+    loading: users === {}
+  }
+}
+export default connect(mapStateToProp)(App)
+
+/*
+
+Original/Alternative: <Route path='/' exact component={LoginPage} />
+   - Does not allow inclusion of props.
 
   render() {
     console.log ("App: render -", this.props)
@@ -51,26 +89,6 @@ class App extends Component {
     );
   }
 }
-
-function mapStateToProp({users}) {
-  return {
-    loading: users === {}
-  }
-}
-export default connect(mapStateToProp)(App)
-
-/*
-
-Original/Alternative: <Route path='/' exact component={LoginPage} />
-   - Does not allow inclusion of props.
-
-Once API is being called (Eduardo)
-             {this.props.loading === true
-                ? null
-                : <div>
-                   <Route path='/' exact component={LoginPage} />
-                </div>
-              }
 
 
 

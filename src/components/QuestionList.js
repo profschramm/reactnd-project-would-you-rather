@@ -2,20 +2,16 @@ import React, {Component, Fragment} from 'react';
 import {BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 import LoadingBar from 'react-redux-loading'
+import {handleInitialData} from '../actions/shared'
 import '../App.css';
-import Nav from './Nav'
 import { Redirect } from 'react-router-dom'
-import NewQuestionPage from './NewQuestionPage'
-import QuestionPage from './QuestionPage'
-import QuestionAnswerPage from './QuestionAnswerPage'
-import Leaderboard from './Leaderboard'
-import QuestionList from './QuestionList'
+import QuestionContainer from './QuestionContainer'
 
 
 export const ANSWERED_QUESTIONS = "Answered Questions"
 export const UNANSWERED_QUESTIONS = "Unanswered Questions"
 
-class HomePage extends Component {
+class QuestionList extends Component {
 
   state = {
     loggedInUser: null,
@@ -38,21 +34,35 @@ class HomePage extends Component {
   }
 
   render() {
-    console.log ("HomePage: render -", this.props)
+    console.log ("QuestionList: render -", this.props)
 
     return (
-      <div>
-          <Nav username={this.props.authedUser}/>
-          <QuestionList/>
+          <div className='container'>
 
-       </div>
+            <div className="row">
+              <div className="column">
+                <QuestionContainer 
+                name={ANSWERED_QUESTIONS}
+                viewDetails={this.viewUnansweredDetails}
+                viewDetailsURL = "/question"/>
+              </div>
+              <div className="column">
+                <QuestionContainer 
+                name={UNANSWERED_QUESTIONS}
+                viewDetails={this.viewAnsweredDetails}
+                viewDetailsURL = "/questions"/>
+            </div>                
+              </div>
 
+          <div>
+        </div>
+    </div>
     );
   }
 }
 
 function mapStateToProp({authedUser, users, questions}) {
-  console.log ("HomePage:mapStateToProps", authedUser)
+  console.log ("QuestionList:mapStateToProps", authedUser)
   return {
     authedUser,
     users,
@@ -60,5 +70,5 @@ function mapStateToProp({authedUser, users, questions}) {
     loading: authedUser === null
   }
 }
-export default connect(mapStateToProp)(HomePage)
+export default connect(mapStateToProp)(QuestionList)
 
