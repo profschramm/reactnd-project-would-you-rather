@@ -1,13 +1,20 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
+import { convertToArray } from '../utils/helpers';
 
 class QuestionAnswerPage extends Component { 
     
     render() {
-        const { question, authedUser } = this.props    
+        const { questions, authedUser } = this.props    
 
-        if (question === null) {
+        const { question_id } = this.props.match.params
+
+        // const question = questions[question_id]
+        const question = questions.filter( (q) => q.id === question_id)
+
+       //if (question === null) {
+        if (question.length === 0) {
             return <p> This question does not exist. 404 page</p>
         }
         const {
@@ -35,10 +42,23 @@ class QuestionAnswerPage extends Component {
 }
 
 // URL Reference on mapStateToProps with arguments: https://react-redux.js.org/using-react-redux/connect-mapstate
-
+/*
 function mapStateToProps({questions}, {qid}) {
     const question = questions[qid]
 return {question}
+}
+*/
+function mapStateToProps ({questions, authedUser}) {
+    return { 
+        questions: convertToArray(questions),
+        authedUser,
+    }  
+    /* return {
+        questions: convertToArray(questions),
+        authedUser,
+        users: convertToArray(users)
+    }
+    */
 }
 
 export default withRouter(connect(mapStateToProps)(QuestionAnswerPage))

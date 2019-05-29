@@ -15,8 +15,7 @@ class QuestionPreview extends Component {
 
     handleSubmit = (e) => {     // If using a Button (not a Link)
         e.preventDefault()
-        // Redirect to QuestionPage
-        // this.props.history.push(`/questionAnswer/${id}`)
+        // Redirect via the passed-function, that will either go to question (for unanswered) or questions(for answered)
         this.props.viewDetails(this.props.qid)
     }
 
