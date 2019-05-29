@@ -31,14 +31,12 @@ class QuestionPreview extends Component {
             return <p> This question does not exist. 404 page</p>
         }
         const question = questionArray[0]
-        const URL = this.props.viewDetailsURL.concat(`/:${qid}`)
-        //console.log ("QuestionPreview:render", qid, question, this.props.viewDetailsURL, URL)
-
+        const url = this.props.viewDetailsURL.concat(`/${qid}`)
         return (
             <div className='question-info'>
                 <span> {question.author} asks: </span>
                 <div>Would you rather {question.optionOne.text}
-                <Link to='/questions/:vthrdm985a262al8qx3do' >
+                <Link to={url}>
                     <button>View Details</button>
                 </Link>
                 </div>

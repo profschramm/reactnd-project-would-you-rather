@@ -32,6 +32,7 @@ class App extends Component {
         <Router>
           <Switch>
               <Route path='/' exact render={ ( {history}) => (<LoginPage />)}/>
+
               <Route path='/home' render={ () => (<HomePage />)}/>
               <Route path='/add' render={ () => (<NewQuestionPage />)}/>
               <Route path='/question/:question_id' render={ () => (<QuestionPage />)}/>

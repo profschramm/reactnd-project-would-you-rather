@@ -6,18 +6,12 @@ import {handleInitialData} from '../actions/shared'
 import '../App.css';
 import { Redirect } from 'react-router-dom'
 import QuestionContainer from './QuestionContainer'
-
-export const ANSWERED_QUESTIONS = "Answered Questions"
-export const UNANSWERED_QUESTIONS = "Unanswered Questions"
+import { ANSWERED_QUESTIONS, UNANSWERED_QUESTIONS} from './QuestionContainer'
 
 class QuestionList extends Component {
 
   state = {
     loggedInUser: null,
-  }
-
-  refresh = () => {
-    // Trigger a refresh
   }
  
   viewAnsweredDetails = (qid) => {
@@ -42,13 +36,13 @@ class QuestionList extends Component {
               <div className="column">
                 <QuestionContainer 
                 name={ANSWERED_QUESTIONS}
-                viewDetails={this.viewUnansweredDetails}
+                viewDetails={this.viewAnsweredDetails}
                 viewDetailsURL = "/question"/>
               </div>
               <div className="column">
                 <QuestionContainer 
                 name={UNANSWERED_QUESTIONS}
-                viewDetails={this.viewAnsweredDetails}
+                viewDetails={this.viewUnansweredDetails}
                 viewDetailsURL = "/questions"/>
             </div>                
               </div>

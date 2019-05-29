@@ -4,6 +4,10 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { convertToArray } from '../utils/helpers'
+import RedirectLogin from './RedirectLogin'
+
+export const ANSWERED_QUESTIONS = "Answered Questions"
+export const UNANSWERED_QUESTIONS = "Unanswered Questions"
 
 class QuestionContainer extends Component {
 
@@ -13,41 +17,45 @@ class QuestionContainer extends Component {
         viewDetailsURL: PropTypes.string.isRequired
     }
     
-    filterAnsweredQuestions = (questions, users, author) => {
-        const userInfo = users.filter( (user) => (
-            user.id  === author
-        ))
-        if (userInfo && userInfo.length != 0) {
-            const userAnswers = userInfo[0].userAnswers
-            /*  Bug: This code fails, so for now, have commented out and just return matches =questions
-            const matches = userAnswers.map( (answer) => (
-                questions.filter( (question) => (
-                    question.id === answer
-                )) 
-            ))
-            */
-            const matches = questions
-            return matches
+    filterQuestions = (questions, users, author, answered) => {
+        const userInfo = users.find (
+            (user) => (   // () are an implicit return rather than explicit return {}
+                user.name  === author
+            )
+        ) 
+        if (userInfo) {
+           const userAnswers = userInfo.answers
+           const questionKeys = Object.keys (userAnswers)
+           const questionValues = Object.values(questions)
+           if (answered===true) {
+                const filtered = questionValues.filter( (aQuestion) => questionKeys.includes(aQuestion.id) )
+                return filtered
+           } else {
+                const filtered = questionValues.filter( (aQuestion) => !questionKeys.includes(aQuestion.id) )
+                return filtered
+           }
         } else {
-            return questions
+            return []
         }
     }
 
     render() {
-        const { questions, users, authedUser } = this.props    // TBD: Add users, to get the avatarURL
+        const { questions, users, authedUser } = this.props    
         //console.log ("QuestionContainer:render", this.props.viewDetailsURL, authedUser, questions)
     
         if (authedUser === null) {  // Temporary until I figure out why authedUser is not set
-            return <p> The user is not logged on</p>
-            
+            return <RedirectLogin/>
         } 
-        const questionArray = this.filterAnsweredQuestions(questions, users, authedUser)
+
+       const filteredQuestions = (this.props.name === ANSWERED_QUESTIONS) 
+            ? this.filterQuestions(questions, users, authedUser, true)
+            : this.filterQuestions(questions, users, authedUser, false)
 
         return (
             <div className="container">
                 <h3>{this.props.name}</h3>
                 <ul className="ul">
-                   {questions.map( (question) => (
+                   {filteredQuestions.map( (question) => (
                        <li  className="li" key={question.id}> 
                             <QuestionPreview qid={question.id} viewDetails={this.props.viewDetails} viewDetailsURL={this.props.viewDetailsURL}/>
                         </li>

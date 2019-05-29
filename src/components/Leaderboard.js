@@ -8,7 +8,9 @@ class Leaderboard extends Component {
        }
 
     render() {
-        const { users } = this.props
+        const { users, authedUser } = this.props
+        //if (authedUser === null) Redirect (/Login)
+
         console.log("Leaderboard: render - props", this.props.users)
         return (
             <div>

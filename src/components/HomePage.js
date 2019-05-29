@@ -24,6 +24,7 @@ class HomePage extends Component {
       <div>
           <Nav username={this.props.authedUser}/>
           <QuestionList/>
+          
        </div>
 
     );
