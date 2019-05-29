@@ -6,14 +6,14 @@ class QuestionAnswerPage extends Component {
     
     render() {
         const { question, authedUser } = this.props    
-/*
+
         if (question === null) {
             return <p> This question does not exist. 404 page</p>
         }
         const {
             qid, author, timestamp, optionOne, optionTwo
         } = question
-*/
+
         const avatarURL="https://tylermcginnis.com/would-you-rather/tyler.jpg"
         const name = "Tyler"
 /*

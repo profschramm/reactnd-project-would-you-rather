@@ -39,10 +39,7 @@ class QuestionPreview extends Component {
             <div className='question-info'>
                 <span> {question.author} asks: </span>
                 <div>Would you rather {question.optionOne.text}
-                <Link 
-                    to='${this.URL}'
-                    className='btn'
-                >
+                <Link to='/questions/:vthrdm985a262al8qx3do' >
                     <button>View Details</button>
                 </Link>
                 </div>

@@ -21,22 +21,6 @@ class HomePage extends Component {
     loggedInUser: null,
   }
 
-  refresh = () => {
-    // Trigger a refresh
-  }
- 
-  viewAnsweredDetails = (qid) => {
-    console.log ("VIEW ANSWERED", qid)
-    //this.props.history.push(`/question:${qid}/`)
-    return <Redirect to='/question:${qid}' />
-  }
-
-  viewUnansweredDetails = (qid) => {
-    console.log ("VIEW UNANSWERED", qid)
-    //this.props.history.push(`/questions:${qid}/`)
-    return <Redirect to='/questions:${qid}' />
-  }
-
   render() {
     console.log ("HomePage: render -", this.props)
 
@@ -44,7 +28,6 @@ class HomePage extends Component {
       <div>
           <Nav username={this.props.authedUser}/>
           <QuestionList/>
-
        </div>
 
     );

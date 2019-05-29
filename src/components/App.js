@@ -35,7 +35,7 @@ class App extends Component {
               <Route path='/home' render={ () => (<HomePage />)}/>
               <Route path='/add' render={ () => (<NewQuestionPage />)}/>
               <Route path='/question/:question_id' render={ () => (<QuestionPage />)}/>
-              <Route path='/answers' render={ () => (<QuestionAnswerPage />)}/>
+              <Route path='/questions/:question_id' render={ () => (<QuestionAnswerPage />)}/>
               <Route path='/leaderboard' render={ () => (<Leaderboard />)}/>
            </Switch>
         </Router>

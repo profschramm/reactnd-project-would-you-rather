@@ -7,7 +7,6 @@ import '../App.css';
 import { Redirect } from 'react-router-dom'
 import QuestionContainer from './QuestionContainer'
 
-
 export const ANSWERED_QUESTIONS = "Answered Questions"
 export const UNANSWERED_QUESTIONS = "Unanswered Questions"
 
