@@ -37,5 +37,6 @@ import {
   }
 
   export function saveQuestionAnswer ({ authedUser, qid, answer }) {
-    return _saveQuestionAnswer( { authedUser, qid, answer })
+    const temp = _saveQuestionAnswer( { authedUser, qid, answer })
+    return temp 
   }

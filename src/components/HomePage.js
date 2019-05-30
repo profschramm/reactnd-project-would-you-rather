@@ -1,21 +1,21 @@
 import React, {Component} from 'react';
-import { connect } from 'react-redux'
 import '../App.css';
 import Nav from './Nav'
 import QuestionList from './QuestionList'
+import RedirectLogin from './RedirectLogin'
+import { connect } from 'react-redux'
 
 class HomePage extends Component {
 
-  state = {
-    loggedInUser: null,
-  }
-
   render() {
-    console.log ("HomePage: render -", this.props)
+    console.log ("Homepage")
+    if (this.props.authedUser === null) { 
+      return <RedirectLogin />
+    }
 
     return (
       <div>
-          <Nav username={this.props.authedUser}/>
+          <Nav />
           <QuestionList/>  
        </div>
 
@@ -23,14 +23,12 @@ class HomePage extends Component {
   }
 }
 
-function mapStateToProp({authedUser, users, questions}) {
-  console.log ("HomePage:mapStateToProps", authedUser)
+function mapStateToProp({authedUser}) {
+ 
   return {
-    authedUser,
-    users,
-    questions,
-    loading: authedUser === null
+    authedUser
   }
 }
 export default connect(mapStateToProp)(HomePage)
+  
 

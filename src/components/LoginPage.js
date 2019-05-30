@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { setAuthedUser } from '../actions/authedUser'
-import { Redirect } from 'react-router-dom'
 import { convertToArray } from '../utils/helpers';
+import { Redirect} from 'react-router-dom'
 
 class LoginPage extends Component {
 
@@ -51,7 +51,7 @@ class LoginPage extends Component {
                     {users.map((user) => (
                         <option 
                             key={user.id} 
-                            value={user.name}>
+                            value={user.id}>
                             {user.name}
                         </option>
                     ))}
@@ -71,8 +71,3 @@ function mapStateToProps({ users }) {
     }
 }
 export default connect(mapStateToProps)(LoginPage)
-
-/*
-        users: Object.keys(users)
-            .sort((a,b) => users[b].id - users[a].id)
-*/

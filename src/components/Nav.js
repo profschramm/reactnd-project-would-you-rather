@@ -1,16 +1,13 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
-import PropTypes from 'prop-types'
+import { convertToArray } from '../utils/helpers'
 
-//export default function Nav() {  // Chanded to a Component, to pass along prop:username 
+//export default function Nav() {  // Changed to a Component, to pass along prop:username 
 class Nav extends Component {
 
-    static propTypes = {
-        username: PropTypes.string.isRequired,
-    }
-
     render () {
-        console.log ("Nav:render", this.props)
+        // const {authedUser, username, userAvatarURL} = this.props
         return (
             <nav className='nav'>
                  <ul>
@@ -33,7 +30,7 @@ class Nav extends Component {
                          <label>Hello {this.props.username}</label>
                      </li>
                      <li>
-                         <NavLink to='/' activeClassName='active'>
+                         <NavLink to='/login' activeClassName='active'>
                          Logout
                          </NavLink>
                      </li>
@@ -44,4 +41,16 @@ class Nav extends Component {
 
 }
 
-export default Nav;
+function mapStateToProp({authedUser, users}) {
+ 
+    const userInfo = convertToArray(users).find (
+      (user) => ( user.id  === authedUser )
+    )  
+    return {
+      authedUser,
+      username: userInfo.name,
+      userAvatarURL: userInfo.userAvatarURL
+    }
+  }
+  export default connect(mapStateToProp)(Nav)
+  

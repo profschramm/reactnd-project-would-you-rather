@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { convertToArray } from '../utils/helpers';
 import Nav from './Nav'
+import RedirectLogin from './RedirectLogin'
 
 class Leaderboard extends Component {
     state = {
@@ -9,13 +10,14 @@ class Leaderboard extends Component {
        }
 
     render() {
-        const { users, authedUser } = this.props
-        //if (authedUser === null) Redirect (/Login)
-
+        const { authedUser, users  } = this.props
+        if (authedUser === null) { 
+            return <RedirectLogin/>
+        }
         console.log("Leaderboard: render - props", this.props.users)
         return (
             <div>
-                <Nav username={this.props.authedUser}/>
+                <Nav />
                 <ul className='leaderboard-list'>
                     {users.map((user) => (
                        <li key={user.id}>
@@ -41,18 +43,10 @@ class Leaderboard extends Component {
     }
 }
 
-function mapStateToProps({ users, authedUser }) {
+function mapStateToProps({ authedUser, users }) {
     return {
-        users: convertToArray(users),
-        authedUser
+        authedUser,
+        users: convertToArray(users)
     }
 }
 export default connect(mapStateToProps)(Leaderboard)
-
-/*
-
-    return {
-        users: Object.keys(users)
-            .sort((a,b) => users[b].id - users[a].id)
-    }
-                            */

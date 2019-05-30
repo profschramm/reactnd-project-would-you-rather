@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { handleAddQuestion } from '../actions/questions'
 import { Redirect } from 'react-router-dom'
 import Nav from './Nav'
+import RedirectLogin from './RedirectLogin'
 
 class NewQuestionPage extends Component {
 
@@ -39,10 +40,13 @@ class NewQuestionPage extends Component {
     }
     render() {
         const { optionOne, optionTwo, toHome } = this.state
-
+        if (this.props.authedUser === null) { 
+            return <RedirectLogin/>
+        }
         if (toHome === true) {  // Redirect if submitted
             return <Redirect to='/' />
         }
+
         // For warning the user that space is running out
         const optionOneLeft = 280- optionOne.length
         const optionTwoLeft = 280- optionTwo.length

@@ -1,62 +1,72 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import { handleSaveQuestionAnswer } from '../actions/shared'
-import { Link, withRouter } from 'react-router-dom'
+import { Redirect, withRouter } from 'react-router-dom'
 import Nav from './Nav'
+import { convertToArray } from '../utils/helpers';
+import RedirectLogin from './RedirectLogin'
 
 class QuestionPage extends Component { 
 
     state = {
         selectedOption: 'optionOne',
+        toNextPage: false,
     }
 
     handleCheck = (e) => {
+ 
         e.preventDefault()
         const selectedOption = e.target.value
         this.setState( () => ( {
             selectedOption,
         }))
+        console.log ("QuestionPage: handleCheck", e.target.value, this.state.selectedOption)
     }
 
     handleSubmit = (e) => {
         e.preventDefault()
-        const { dispatch, question, authedUser } = this.props
+        console.log ("QuestionPage: submit", this.state.selectedOption, e.target.value, this.props)
+        const { dispatch, questions, authedUser, qid } = this.props
 
         dispatch(handleSaveQuestionAnswer( {
             authedUser,
-            questionId: question.id,
+            questionId: qid,
             selectedOption: this.state.selectedOption,
 
         }))
-
-        // Redirect to parent QuestionAnswerPage
-        // this.props.history.push(`/questionAnswer/${id}`)
-        this.props.history.push(`/questionAnswer/`)
+        this.setState( () => ({
+                toNextPage: true        // Enable redirect to next page
+            }))
+        // this.props.history.push(`/questions/${id}`)
     }
 
     render() {
-        const { question, users } = this.props    
-        // use React Router to get the passed qid
-/*
-        if (question === null) {
+
+        const { authedUser, users, questions, qid } = this.props  
+        if (authedUser === null) { 
+            return <RedirectLogin/>
+        }
+        if (this.state.toNextPage === true) { // Redirect if submitted
+            return <Redirect to='/questions/${qid}' />
+        }
+        
+        const question = questions.find (
+            (question) => (   // () are an implicit return rather than explicit return {}
+                question.id  === qid
+            )
+        ) 
+        if (!question || question === null) {
             return <p> This question does not exist. 404 page</p>
         }
-        const {
-            qid, author, timestamp, optionOne, optionTwo
-        } = question
-        const {
-            uid, name, avatarURL, answers, questions
-        } = users
-        console.log ("QuestionPage:render", this.props)
+        const author = users.find (
+            (user) => (  user.id  === question.author )
+        )
+        const avatarURL = author.avatarURL
+        const name = author.name
 
-*/
-        const avatarURL="https://tylermcginnis.com/would-you-rather/tyler.jpg"
-        const name = "Tyler"
-        const optionOne = "One"
-        const optionTwo = "Two"
         return (
             <div>
-                <Nav username={this.props.authedUser}/>
+                <Nav />
                 <img
                     src= {avatarURL}
                     alt= {`Avatar of ${name}`}            
@@ -71,10 +81,11 @@ class QuestionPage extends Component {
                                 type="radio" 
                                 name="question-options"
                                 value="optionOne"
-                                checked={true}
+                                checked={this.state.selectedOption === "optionOne"}
+                                onChange={this.handleCheck}
                                 className="radio-input"
                             />
-                            {optionOne}
+                            {question.optionOne.text}
                         </span>
                         </div>
                         <div>
@@ -83,10 +94,11 @@ class QuestionPage extends Component {
                                 type="radio" 
                                 name="question-options"
                                 value="optionTwo"
-                                checked={false}
+                                checked={this.state.selectedOption === "optionTwo"}
+                                onChange={this.handleCheck}
                                 className="radio-input"
                             />
-                            {optionTwo}
+                            {question.optionTwo.text}
                         </span>
                         </div>
                      
@@ -109,19 +121,13 @@ function mapStateToProps({authedUser, users, questions}, {match}) {
 
     const qid = match.params.question_id
     // Reference: https://reacttraining.com/react-router/web/example/url-params
-    const question = questions[qid]
-        // Could be undefined!! ERROR! TBD
-        // Possibly a flag to be passed to render, true or false
+
       return {
         authedUser,
-        question,
+        users: convertToArray(users),
+        questions: convertToArray(questions),
         qid
     }
 }
 
 export default withRouter(connect(mapStateToProps)(QuestionPage))
-
-/*
-  ? formatQuestion(question, users[question.author], authedUser)
-            : null
-             */

@@ -1,4 +1,4 @@
-import React, {Component, Fragment} from 'react';
+import React, {Component} from 'react';
 import {BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 import LoadingBar from 'react-redux-loading'
@@ -10,7 +10,6 @@ import NewQuestionPage from './NewQuestionPage'
 import QuestionPage from './QuestionPage'
 import QuestionAnswerPage from './QuestionAnswerPage'
 import Leaderboard from './Leaderboard'
-import Nav from './Nav'
 
 
 // Attribution URL: https://medium.com/@leonardobrunolima/react-tips-handling-404-pages-24d27191a8dd

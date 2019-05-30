@@ -20,7 +20,7 @@ class QuestionContainer extends Component {
     filterQuestions = (questions, users, author, answered) => {
         const userInfo = users.find (
             (user) => (   // () are an implicit return rather than explicit return {}
-                user.name  === author
+                user.id  === author
             )
         ) 
         if (userInfo) {
@@ -41,9 +41,8 @@ class QuestionContainer extends Component {
 
     render() {
         const { questions, users, authedUser } = this.props    
-        //console.log ("QuestionContainer:render", this.props.viewDetailsURL, authedUser, questions)
     
-        if (authedUser === null) {  // Temporary until I figure out why authedUser is not set
+        if (authedUser === null) {  
             return <RedirectLogin/>
         } 
 
@@ -66,11 +65,11 @@ class QuestionContainer extends Component {
     }
 }
 
-function mapStateToProps({ questions, users, authedUser }) {
+function mapStateToProps({ authedUser, users, questions, }) {
     return {
-        questions: convertToArray(questions),
         authedUser,
-        users: convertToArray(users)
+        users: convertToArray(users),
+        questions: convertToArray(questions)
     }
 }
 

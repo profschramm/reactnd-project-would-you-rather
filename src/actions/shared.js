@@ -25,7 +25,12 @@ export function handleSaveQuestionAnswer( {authedUser, questionId, selectedOptio
     console.log ("shared:handleSaveQuestionAnswer")
     return (dispatch) => {
         dispatch(showLoading())
-        return saveQuestionAnswer( {authedUser, questionId, selectedOption})
+        
+        return saveQuestionAnswer( {
+                authedUser, 
+                qid:questionId, 
+                answer:selectedOption
+        })
             .then (({users, questions}) => {
                 console.log ("shared:handleInitialData:then")
                 dispatch(getUsers(users))

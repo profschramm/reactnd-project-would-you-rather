@@ -20,21 +20,29 @@ class QuestionPreview extends Component {
     }
 
     render() {
-        const { questions, qid } = this.props    // TBD: Add users, to get the avatarURL
+        const { questions, users, qid } = this.props    // TBD: Add users, to get the avatarURL
 
         if (qid === null) {
             return <p> No question identifier was given. 404 page</p>
         }
 
-        const questionArray = questions.filter(q=>q.id === qid)
-        if (questionArray.length === 0) {
+        const question = questions.find (
+            (question) => (   // () are an implicit return rather than explicit return {}
+                question.id  === qid
+            )
+        )
+        if (!question) {
             return <p> This question does not exist. 404 page</p>
         }
-        const question = questionArray[0]
+        const userInfo = users.find (
+            (user) => (   // () are an implicit return rather than explicit return {}
+                user.id  === question.author
+            )
+        )
         const url = this.props.viewDetailsURL.concat(`/${qid}`)
         return (
             <div className='question-info'>
-                <span> {question.author} asks: </span>
+                <span> Asked by {userInfo.name}: </span>
                 <div>Would you rather {question.optionOne.text}
                 <Link to={url}>
                     <button>View Details</button>
@@ -45,8 +53,10 @@ class QuestionPreview extends Component {
     }   
 }
 
-function mapStateToProps({ questions }) {
+function mapStateToProps({ authedUser, users, questions }) {
     return {
+        authedUser,
+        users: convertToArray(users),
         questions: convertToArray(questions)
     }
 }
