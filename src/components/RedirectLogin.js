@@ -7,7 +7,7 @@ export default function RedirectLogin() {
 
         <div>
             <p> You must be logged in</p>
-            <Link to='/'>
+            <Link to='/login'>
                 Login
             </Link>
         </div>
