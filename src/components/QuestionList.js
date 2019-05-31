@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux'
 import '../App.css';
-import { Redirect } from 'react-router-dom'
 import QuestionContainer from './QuestionContainer'
 import { ANSWERED_QUESTIONS, UNANSWERED_QUESTIONS} from './QuestionContainer'
 import {Tab} from 'semantic-ui-react'
@@ -14,30 +13,12 @@ class QuestionList extends Component {
     key: ANSWERED_QUESTIONS
   }
  
-  viewAnsweredDetails = (qid) => {
-    console.log ("VIEW ANSWERED", qid)
-    //this.props.history.push(`/question:${qid}/`)
-    return <Redirect to='/questions:${qid}' />
-  }
-
-  viewUnansweredDetails = (qid) => {
-    console.log ("VIEW UNANSWERED", qid)
-    //this.props.history.push(`/questions:${qid}/`)
-    return <Redirect to='/question:${qid}' />
-  }
-
-  handleSelectTab = (key) => {
-    this.setState( { key })
-    
-  }
   render() {
-    console.log ("QuestionContainer:render", this.state.key)
 
     const panes = [{menuItem: ` ${ANSWERED_QUESTIONS} `, 
                     render: ()=> <Tab.Pane> 
                                    <QuestionContainer 
                                       name={ANSWERED_QUESTIONS}
-                                      viewDetails={this.viewAnsweredDetails}
                                       viewDetailsURL = "/questions"
                                     />
                                   </Tab.Pane> },
@@ -45,7 +26,6 @@ class QuestionList extends Component {
                     render:() => <Tab.Pane> 
                                     <QuestionContainer 
                                       name={UNANSWERED_QUESTIONS}
-                                      viewDetails={this.viewunAnsweredDetails}
                                       viewDetailsURL = "/question"
                                     />
                                   </Tab.Pane> },
@@ -57,7 +37,6 @@ class QuestionList extends Component {
 }
 
 function mapStateToProp({authedUser, users, questions}) {
-  console.log ("QuestionList:mapStateToProps", authedUser)
   return {
     authedUser,
     users,

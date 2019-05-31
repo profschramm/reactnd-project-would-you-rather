@@ -9,7 +9,6 @@ class QuestionPreview extends Component {
 
     static propTypes = {
         qid: PropTypes.string.isRequired,
-        viewDetails: PropTypes.func.isRequired,
         viewDetailsURL: PropTypes.string.isRequired
     }
 
@@ -62,15 +61,3 @@ function mapStateToProps({ authedUser, users, questions }) {
 }
 
 export default withRouter(connect(mapStateToProps)(QuestionPreview))
-
-
-/* Using a button with a handler
-                <button 
-                    className='btn' 
-                    type="submit"
-                    onClick={(e) => this.handleSubmit(e)}>
-                    View Details
-                </button>
-
-Hard fixed Link URL                     to='/questions/:vthrdm985a262al8qx3do'
-*/

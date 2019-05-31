@@ -13,7 +13,6 @@ class QuestionContainer extends Component {
 
     static propTypes = {
         name: PropTypes.string.isRequired,
-        viewDetails: PropTypes.func.isRequired,
         viewDetailsURL: PropTypes.string.isRequired
     }
     
@@ -41,7 +40,6 @@ class QuestionContainer extends Component {
 
     render() {
         const { questions, users, authedUser } = this.props    
-        // console.log ("QuestionContainer:render", this.props)
         if (authedUser === null) {  
             return <RedirectLogin/>
         } 
@@ -56,7 +54,7 @@ class QuestionContainer extends Component {
                 <ul className="ul">
                    {filteredQuestions.map( (question) => (
                        <li  className="li" key={question.id}> 
-                            <QuestionPreview qid={question.id} viewDetails={this.props.viewDetails} viewDetailsURL={this.props.viewDetailsURL}/>
+                            <QuestionPreview qid={question.id} viewDetailsURL={this.props.viewDetailsURL}/>
                         </li>
                    ))}
                 </ul>

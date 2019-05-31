@@ -14,13 +14,13 @@ function addQuestion (question) {   // Should I export?? Not for optimistic-upda
 // handleAddQuestion uses optimistic-update.
 // TBD: Check the format of the question information being passed about.
 
-export function handleAddQuestion (optionOne, optionTwo, id) {
+export function handleAddQuestion (optionOne, optionTwo, authorId) {
     return (dispatch, getState) => {
         dispatch (showLoading())
         return saveQuestion( {          
-                optionOne,
-                optionTwo,
-                author: id,   // Or should it be authedUser from the store?
+                optionOneText: optionOne,
+                optionTwoText: optionTwo,
+                author: authorId,   // Should be equal to authedUser from the store
         })
             .then( (question) => dispatch(addQuestion(question)))
             .then( () => dispatch(hideLoading()))

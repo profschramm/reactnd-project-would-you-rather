@@ -10,6 +10,7 @@ export default function questions (state = {}, action) {  // Default arg to init
                 ...action.questions 
             }
         case ADD_QUESTION:      
+            console.log ("ADD_QUESTION")
             const { question } = action
             return {
                 ...state,
