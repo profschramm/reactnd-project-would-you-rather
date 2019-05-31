@@ -9,6 +9,13 @@ Using the provided starter code, you'll build a React/Redux front end for the ap
 ## TBD: Look at this URL for including a header on every page with "withRouter"
 ## https://stackoverflow.com/questions/53539314/what-is-withrouter-for-in-react-router-dom
 
+## Dependencies
+
+npm install --save semantic-ui-react
+npm install --save semantic-ui --only=dev
+  (or deprecated: npm install --save semantic-ui --dev)
+   
+
 ## Data
 
 There are two types of objects stored in our database:

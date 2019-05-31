@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import LoadingBar from 'react-redux-loading'
 import {handleInitialData} from '../actions/shared'
 import '../App.css';
+//import '../semantic-ui/dist/semantic.min.css'
+  // TBD: Could not get this import to work. Was trying to make my tabs look prettier
 import LoginPage from './LoginPage'
 import HomePage from './HomePage'
 import NewQuestionPage from './NewQuestionPage'

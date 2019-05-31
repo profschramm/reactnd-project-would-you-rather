@@ -4,11 +4,14 @@ import '../App.css';
 import { Redirect } from 'react-router-dom'
 import QuestionContainer from './QuestionContainer'
 import { ANSWERED_QUESTIONS, UNANSWERED_QUESTIONS} from './QuestionContainer'
+import {Tab} from 'semantic-ui-react'
+  // URL: https://react.semantic-ui.com/modules/tab/#types-basic
 
 class QuestionList extends Component {
 
   state = {
     loggedInUser: null,
+    key: ANSWERED_QUESTIONS
   }
  
   viewAnsweredDetails = (qid) => {
@@ -23,31 +26,33 @@ class QuestionList extends Component {
     return <Redirect to='/question:${qid}' />
   }
 
+  handleSelectTab = (key) => {
+    this.setState( { key })
+    
+  }
   render() {
-    console.log ("QuestionList: render -", this.props)
+    console.log ("QuestionContainer:render", this.state.key)
 
-    return (
-          <div className='container'>
-
-            <div className="row">
-              <div className="column">
-                <QuestionContainer 
-                name={ANSWERED_QUESTIONS}
-                viewDetails={this.viewAnsweredDetails}
-                viewDetailsURL = "/questions"/>
-              </div>
-              <div className="column">
-                <QuestionContainer 
-                name={UNANSWERED_QUESTIONS}
-                viewDetails={this.viewUnansweredDetails}
-                viewDetailsURL = "/question"/>
-            </div>                
-              </div>
-
-          <div>
-        </div>
-    </div>
-    );
+    const panes = [{menuItem: ` ${ANSWERED_QUESTIONS} `, 
+                    render: ()=> <Tab.Pane> 
+                                   <QuestionContainer 
+                                      name={ANSWERED_QUESTIONS}
+                                      viewDetails={this.viewAnsweredDetails}
+                                      viewDetailsURL = "/questions"
+                                    />
+                                  </Tab.Pane> },
+                    {menuItem: ` ${UNANSWERED_QUESTIONS} `, 
+                    render:() => <Tab.Pane> 
+                                    <QuestionContainer 
+                                      name={UNANSWERED_QUESTIONS}
+                                      viewDetails={this.viewunAnsweredDetails}
+                                      viewDetailsURL = "/question"
+                                    />
+                                  </Tab.Pane> },
+    ]
+   return (
+     <Tab panes={panes} />
+   )
   }
 }
 
@@ -60,5 +65,6 @@ function mapStateToProp({authedUser, users, questions}) {
     loading: authedUser === null
   }
 }
-export default connect(mapStateToProp)(QuestionList)
+
+export default connect(mapStateToProp)(QuestionList);
 

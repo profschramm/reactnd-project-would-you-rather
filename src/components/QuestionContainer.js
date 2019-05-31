@@ -41,7 +41,7 @@ class QuestionContainer extends Component {
 
     render() {
         const { questions, users, authedUser } = this.props    
-    
+        // console.log ("QuestionContainer:render", this.props)
         if (authedUser === null) {  
             return <RedirectLogin/>
         } 
@@ -52,7 +52,7 @@ class QuestionContainer extends Component {
 
         return (
             <div className="container">
-                <h3>{this.props.name}</h3>
+                <h3> {this.props.name} </h3>
                 <ul className="ul">
                    {filteredQuestions.map( (question) => (
                        <li  className="li" key={question.id}> 
@@ -66,7 +66,14 @@ class QuestionContainer extends Component {
 }
 
 function mapStateToProps({ authedUser, users, questions, }) {
-    return {
+
+    const questionArray = Object.values(questions)
+    const temp = questionArray[0].timestamp
+    /* TBD: Eduardo Bug
+    const sortedQuestionArray = questionArray
+        .sort( (a,b) => questionArray[b].timestamp - questionArray[a].timestamp )
+    */
+        return {
         authedUser,
         users: convertToArray(users),
         questions: convertToArray(questions)

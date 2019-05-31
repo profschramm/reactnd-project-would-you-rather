@@ -33,14 +33,20 @@ class QuestionAnswerPage extends Component {
         
         const percentOne = (question.optionOne.votes.length / totalVotes) * 100
         const percentTwo = (question.optionTwo.votes.length / totalVotes) * 100
-    
+
+        const authedUserInfo = users.find (
+            (user) => (  user.id  === authedUser )
+        )
+        const authedUserAnswers = authedUserInfo.answers
+        const authedUserVote = authedUserAnswers[qid]
+        console.log ('QuestionAnswerPage:render', authedUserVote)
         return (
             <div>
                 <Nav />
                 <div>
                     <img
                         src= {avatarURL}
-                        alt= {`Avatar of ${this.prop.question.author}`}            
+                        alt= {`Avatar of ${question.author}`}            
                         className='avatar'
                     />  
                     <div className='results-info'>
@@ -49,14 +55,19 @@ class QuestionAnswerPage extends Component {
                             <div>
                                 <h2>Results</h2>
                                 <p>Would you rather {question.optionOne.text} ?</p>
-                                <p>{question.optionOne.votes.length} out of {totalVotes}</p>
-                                <input type="range" min="0" max="100" value={percentOne}/>
+                                <p>{question.optionOne.votes.length} out of {totalVotes} ({percentOne})</p>
+                                {authedUserVote && authedUserVote=="optionOne" && (<p><b>Your vote!!</b></p>)}
+                                <input readOnly type="range" min="0" max="100" value={percentOne}/>
                             </div>
                             <div>
                                 <p>Would you rather {question.optionTwo.text} ?</p>
-                                <p>{question.optionTwo.votes.length} out of {totalVotes}</p>
-                                <input type="range" min="0" max="100" value={percentTwo}/>
+                                <p>{question.optionTwo.votes.length} out of {totalVotes} ({percentTwo})</p>
+                                {authedUserVote && authedUserVote=="optionTwo" && (<p><b>Your vote!!</b></p>)}
+                                <input readOnly type="range" min="0" max="100" value={percentTwo}/>
                             </div>
+                            <span>
+                                Current user voted
+                            </span>
                         </div>             
                     </div>
                 </div>
