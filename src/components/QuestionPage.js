@@ -14,13 +14,11 @@ class QuestionPage extends Component {
     }
 
     handleCheck = (e) => {
- 
         e.preventDefault()
         const selectedOption = e.target.value
         this.setState( () => ( {
             selectedOption,
         }))
-        console.log ("QuestionPage: handleCheck", e.target.value, this.state.selectedOption)
     }
 
     handleSubmit = (e) => {

@@ -15,20 +15,23 @@ class QuestionList extends Component {
  
   render() {
 
-    const panes = [{menuItem: ` ${ANSWERED_QUESTIONS} `, 
-                    render: ()=> <Tab.Pane> 
-                                   <QuestionContainer 
-                                      name={ANSWERED_QUESTIONS}
-                                      viewDetailsURL = "/questions"
-                                    />
-                                  </Tab.Pane> },
-                    {menuItem: ` ${UNANSWERED_QUESTIONS} `, 
+    const panes = [
+                  {menuItem: ` ${UNANSWERED_QUESTIONS} `, 
                     render:() => <Tab.Pane> 
-                                    <QuestionContainer 
-                                      name={UNANSWERED_QUESTIONS}
-                                      viewDetailsURL = "/question"
-                                    />
-                                  </Tab.Pane> },
+                      <QuestionContainer 
+                        name={UNANSWERED_QUESTIONS}
+                        viewDetailsURL = "/question"
+                      />
+                    </Tab.Pane> 
+                  },  
+                  {menuItem: ` ${ANSWERED_QUESTIONS} `, 
+                    render: ()=> <Tab.Pane> 
+                      <QuestionContainer 
+                          name={ANSWERED_QUESTIONS}
+                          viewDetailsURL = "/questions"
+                        />
+                      </Tab.Pane> 
+                  },
     ]
    return (
      <Tab panes={panes} />
