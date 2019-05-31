@@ -68,7 +68,6 @@ class QuestionContainer extends Component {
 function mapStateToProps({ authedUser, users, questions, }) {
 
     const questionArray = Object.values(questions)
-    const temp = questionArray[0].timestamp
     /* TBD: Eduardo Bug
     const sortedQuestionArray = questionArray
         .sort( (a,b) => questionArray[b].timestamp - questionArray[a].timestamp )

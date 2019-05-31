@@ -26,7 +26,7 @@ class QuestionPage extends Component {
     handleSubmit = (e) => {
         e.preventDefault()
         console.log ("QuestionPage: submit", this.state.selectedOption, e.target.value, this.props)
-        const { dispatch, questions, authedUser, qid } = this.props
+        const { dispatch, authedUser, qid } = this.props
 
         dispatch(handleSaveQuestionAnswer( {
             authedUser,
