@@ -4,7 +4,6 @@ import {getQuestions} from '../actions/questions'
 import {setAuthedUser} from '../actions/authedUser'
 import {showLoading, hideLoading} from 'react-redux-loading'
 
-//const AUTHED_ID = 'sarahedo'  // Temporary.
 
 export function handleInitialData() {
     console.log ("shared:handleInitialData")
@@ -23,7 +22,8 @@ export function handleInitialData() {
 
 export function handleSaveQuestionAnswer( {authedUser, questionId, selectedOption }) {
     console.log ("shared:handleSaveQuestionAnswer")
-    return (dispatch) => {
+//   return (dispatch) => {
+     return (dispatch, getState) => {
         dispatch(showLoading())
         
         return saveQuestionAnswer( {
@@ -35,9 +35,7 @@ export function handleSaveQuestionAnswer( {authedUser, questionId, selectedOptio
                 console.log ("shared:handleInitialData:then")
                 dispatch(getUsers(users))
                 dispatch(getQuestions(questions))
-                // dispatch(setAuthedUser(authedUser))      // Don't need. Only users and questions changed
                 dispatch(hideLoading())
             })
     }
 }
-

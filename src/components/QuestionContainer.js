@@ -41,7 +41,6 @@ class QuestionContainer extends Component {
     sortQuestionsByTimestamp = (unsorted) => {
         const temp = unsorted[0]
         const tempTimestamp = temp.timestamp
-//        const sorted = unsorted.sort( (a,b) => unsorted[b].timestamp - unsorted[a].timestamp)
         const sorted = unsorted.sort( (a,b) => unsorted[b].timestamp - unsorted[a].timestamp)
         return sorted
     }
@@ -56,7 +55,7 @@ class QuestionContainer extends Component {
             ? this.filterQuestions(questions, users, authedUser, true)
             : this.filterQuestions(questions, users, authedUser, false)
 
-//        const sortedFilteredQuestions = this.sortQuestionsByTimestamp( filteredQuestions)
+//       const sortedFilteredQuestions = this.sortQuestionsByTimestamp( filteredQuestions)
 
         return (
             <div className="container">

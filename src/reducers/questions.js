@@ -4,13 +4,11 @@ export default function questions (state = {}, action) {  // Default arg to init
                                                    // Alternative: createStore() function
     switch (action.type) {
         case GET_QUESTIONS :
-                console.log ("GET_QUESTIONS")
             return {
                 ...state,       // The rest of the state
                 ...action.questions 
             }
         case ADD_QUESTION:      
-            console.log ("ADD_QUESTION")
             const { question } = action
             return {
                 ...state,
