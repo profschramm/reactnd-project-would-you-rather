@@ -45,7 +45,9 @@ class QuestionPage extends Component {
             return <RedirectLogin/>
         }
         if (this.state.toNextPage === true) { // Redirect if submitted
-            return <Redirect to='/questions/${qid}' />
+            const url = "/questions".concat(`/${qid}`)
+            return <Redirect to={url} />
+            //return <Redirect to='/questions/${qid}' />
         }
         
         const question = questions.find (

@@ -4,6 +4,7 @@ import { convertToArray } from '../utils/helpers';
 import Nav from './Nav'
 import RedirectLogin from './RedirectLogin'
 
+
 class Leaderboard extends Component {
     state = {
         selectedUser: null,
@@ -14,18 +15,36 @@ class Leaderboard extends Component {
         const questions = user.questions.length
         return answers+questions
     }
+
+    sortUsersByScore = (unsorted) => {
+        const sorted = unsorted.sort( (a,b) => b["score"] - a["score"])
+        return sorted
+    }
+
     render() {
         const { authedUser, users  } = this.props
         if (authedUser === null) { 
             return <RedirectLogin/>
         }
-        console.log("Leaderboard: render - props", this.props.users)
+        
+        const userInfo = users.map( (user) => {
+            var newObject = {}
+            newObject["name"]=user.name
+            newObject["id"]=user.id
+            newObject["avatarURL"]= user.avatarURL
+            newObject["created"] = user.questions.length
+            newObject["answered"] = Object.keys(user.answers).length
+            newObject["score"] = newObject["created"] + newObject["answered"]
+            return newObject
+        })
+
+        const sortedUsers = this.sortUsersByScore(userInfo)
 
         return (
             <div>
                 <Nav />
                 <ul className='leaderboard-list'>
-                    {users.map((user) => (
+                    {sortedUsers.map((user) => (
                        <li key={user.id}>
                            <div className="user">
                                 <img
@@ -36,14 +55,14 @@ class Leaderboard extends Component {
                                 <h2>{user.name}</h2>
                                 <div className="user">
                                     <label>
-                                        Answered Questions {Object.keys(user.answers).length}
+                                        Answered Questions {user.answered}
                                     </label>
                                     <label>
-                                    Created Questions {user.questions.length} 
+                                    Created Questions {user.created}
                                     </label> 
                                 </div>
                                 <div className="user">
-                                    Score {this.userScore(user)}
+                                    Score {user.score}
                                 </div>
                            </div>
                         </li>

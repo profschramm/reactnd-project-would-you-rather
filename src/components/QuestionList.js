@@ -14,7 +14,6 @@ class QuestionList extends Component {
   }
  
   render() {
-
     const panes = [
                   {menuItem: ` ${UNANSWERED_QUESTIONS} `, 
                     render:() => <Tab.Pane> 

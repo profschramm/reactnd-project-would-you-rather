@@ -39,9 +39,7 @@ class QuestionContainer extends Component {
     }
 
     sortQuestionsByTimestamp = (unsorted) => {
-        const temp = unsorted[0]
-        const tempTimestamp = temp.timestamp
-        const sorted = unsorted.sort( (a,b) => unsorted[b].timestamp - unsorted[a].timestamp)
+        const sorted = unsorted.sort( (a,b) => b.timestamp - a.timestamp)
         return sorted
     }
 
@@ -55,13 +53,12 @@ class QuestionContainer extends Component {
             ? this.filterQuestions(questions, users, authedUser, true)
             : this.filterQuestions(questions, users, authedUser, false)
 
-//       const sortedFilteredQuestions = this.sortQuestionsByTimestamp( filteredQuestions)
-
+       const sortedFilteredQuestions = this.sortQuestionsByTimestamp( filteredQuestions)
         return (
             <div className="container">
                 <h3> {this.props.name} </h3>
                 <ul className="ul">
-                   {filteredQuestions.map( (question) => (
+                   {sortedFilteredQuestions.map( (question) => (
                        <li  className="li" key={question.id}> 
                             <QuestionPreview qid={question.id} viewDetailsURL={this.props.viewDetailsURL}/>
                         </li>
@@ -73,12 +70,7 @@ class QuestionContainer extends Component {
 }
 
 function mapStateToProps({ authedUser, users, questions, }) {
-
-    const questionArray = Object.values(questions)
-    /* TBD: Eduardo Bug
-    const sortedQuestionArray = questionArray
-        .sort( (a,b) => questionArray[b].timestamp - questionArray[a].timestamp )
-    */
+    //const questionArray = Object.values(questions)
         return {
         authedUser,
         users: convertToArray(users),
