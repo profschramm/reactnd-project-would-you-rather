@@ -30,12 +30,11 @@ class NewQuestionPage extends Component {
         const { dispatch, authedUser } = this.props
         
         dispatch( handleAddQuestion(optionOne, optionTwo, authedUser))
-        console.log('New question: ', optionOne, optionTwo, authedUser)
 
         this.setState( () => ({
                 optionOne: '',
                 optionTwo: '',
-                toHome: authedUser ? false : true,
+                toHome: true
         }))
     }
     render() {
