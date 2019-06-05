@@ -1,21 +1,74 @@
 # Would You Rather Project
 
-This is the starter code for the final assessment project for Udacity's React & Redux course.
+This is the second project for Udacity's React & Redux course.  It is a web 
+application that lets a verified user play a game : Would you rather.
+Users - once logged on - may answer questions, add creations, see the results
+on a leaderboard.
 
 The `_DATA.js` file represents a fake database and methods that let you access the data. The only thing you need to edit in the ` _DATA.js` file is the value of `avatarURL`. Each user should have an avatar, so you’ll need to add the path to each user’s avatar.
 
-Using the provided starter code, you'll build a React/Redux front end for the application. We recommend using the [Create React App](https://github.com/facebook/create-react-app) to bootstrap the project.
 
-## TBD: Look at this URL for including a header on every page with "withRouter"
-## https://stackoverflow.com/questions/53539314/what-is-withrouter-for-in-react-router-dom
+# TBD Known Deficiencies
+
+1 Make the vote of the user clearer and prettier
+2 Add Avatar to NavLink header
+3 Modularity: Nav is imported into every Page.  Instead, have one Nav at App.js 
+             that is inherited by all the pages. Tried with "nested Routes" but
+             was unsuccessful
+      Note: I tried following this URL for including a header on every page with "withRouter"  # https://stackoverflow.com/questions/53539314/what-is-withrouter-for-in-react-router-dom
+
+4 Modify the Store to include the username and avatar as well, to avoid constant lookup
 
 ## Dependencies
 
-npm install --save semantic-ui-react
-npm install --save semantic-ui --only=dev
-  (or deprecated: npm install --save semantic-ui --dev)
-   
+To get started developing right away:
 
+* clone the Project - `https://github.com/profschramm/reactnd-project-would-you-rather`
+* install the dependencies - `npm install`
+*    Just in case, you may also have to:
+      `npm install react-redux`
+      `npm install react-redux-loading`
+      `npm install --save semantic-ui-react`
+      `npm install --save semantic-ui --only=dev`
+                (Alternative (deprecated) npm install --save semantic-ui --dev)
+      `npm install prop-types`
+      `npm install react-router-dom`
+* start the development server with `npm start` 
+
+## What You're Getting
+```bash
+├── CONTRIBUTING.md
+├── README.md - This file.
+├── package.json # npm package manager file. 
+├── public
+│   ├── favicon.ico # React Icon, You may change if you wish.
+│   └── index.html # DO NOT MODIFY
+│   └── manifest.json # Tried to modify startURL to ./login
+└── src
+    ├── actions # Actions
+    ├── components # Components
+    │   ├── App.js # This is the root of your app.
+    |   ├── LoginPage # Front page for logging in
+    |   ├── HomePage # Home Page for a logged-in user. Shows a QuestionList
+    |                # of either unanswered or answered questions, within a QuestionContainer, made up of QuestionPreview's
+    |   ├── QuestionPage # Secondary page for answering a question
+    |   ├── QuestionAnswerPage # Secondary page for seeing the answers to a question
+    |   ├── NewQuestionPage # Secondary page for creating a new question
+    |   ├── LeaderboardPage # Secondary page for seeing the leaderboard of all users
+    |   ├── Nav #     
+    ├── reducers # Reducers
+    ├── utils # Accessing the back-end data
+    │   ├── _DATA.js
+    │   ├── api.js   
+        ├── helpers.js  # Helper functions for manipulating the data structures
+    ├── reducers # Reducers
+    ├── App.css # Styles for your app. Feel free to customize this as you desire.
+    ├── icons # Helpful images for your app. Use at your discretion.
+    │   ├── add.svg
+    │   ├── arrow-back.svg
+    │   └── arrow-drop-down.svg
+    ├── index.css # Global styles. You probably won't need to change anything here.
+    └── index.js # You should not need to modify this file. It is used for DOM rendering only.
 ## Data
 
 There are two types of objects stored in our database:

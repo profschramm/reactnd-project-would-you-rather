@@ -11,4 +11,15 @@ export function convertToArray( aHashMapObject ) {
   }) 
   return anArray
 }
+
+export function getUser( users, userId ) {
+  const user = users.find ( (user) => (user.id === userId))
+  return user
+}
+
+export function getQuestion( questions, qid ) {
+  const question = questions.find ( (question) => (question.id === qid))
+  return question
+}
+  
   

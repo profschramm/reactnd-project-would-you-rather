@@ -3,7 +3,7 @@ import QuestionPreview from './QuestionPreview'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import { convertToArray } from '../utils/helpers'
+import { convertToArray, getUser } from '../utils/helpers'
 import RedirectLogin from './RedirectLogin'
 
 export const ANSWERED_QUESTIONS = "Answered Questions"
@@ -17,11 +17,7 @@ class QuestionContainer extends Component {
     }
     
     filterQuestions = (questions, users, author, answered) => {
-        const userInfo = users.find (
-            (user) => (   // () are an implicit return rather than explicit return {}
-                user.id  === author
-            )
-        ) 
+        const userInfo = getUser (users, author)
         if (userInfo) {
            const userAnswers = userInfo.answers
            const questionKeys = Object.keys (userAnswers)

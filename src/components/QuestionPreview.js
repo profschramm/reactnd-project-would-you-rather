@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import { convertToArray } from '../utils/helpers'
+import { convertToArray, getUser, getQuestion } from '../utils/helpers'
 import {Link} from 'react-router-dom'
 
 class QuestionPreview extends Component { 
@@ -25,19 +25,11 @@ class QuestionPreview extends Component {
             return <p> No question identifier was given. 404 page</p>
         }
 
-        const question = questions.find (
-            (question) => (   // () are an implicit return rather than explicit return {}
-                question.id  === qid
-            )
-        )
+        const question = getQuestion( questions, qid) 
         if (!question) {
             return <p> This question does not exist. 404 page</p>
         }
-        const userInfo = users.find (
-            (user) => (   // () are an implicit return rather than explicit return {}
-                user.id  === question.author
-            )
-        )
+        const userInfo = getUser ( users, question.author)
         const url = this.props.viewDetailsURL.concat(`/${qid}`)
         return (
             <div className='question-info'>

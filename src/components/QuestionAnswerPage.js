@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import { convertToArray } from '../utils/helpers';
+import { convertToArray, getUser, getQuestion } from '../utils/helpers';
 import Nav from './Nav'
 import RedirectLogin from './RedirectLogin'
 
@@ -13,17 +13,12 @@ class QuestionAnswerPage extends Component {
             return <RedirectLogin/>
         } 
 
-        const question = questions.find (
-            (question) => (   // () are an implicit return rather than explicit return {}
-                question.id  === qid
-            )
-        ) 
+        const question = getQuestion( questions, qid )
         if (!question || question === null) {
             return <p> This question does not exist. 404 page</p>
         }
-        const author = users.find (
-            (user) => (  user.id  === question.author )
-        )
+        const author = getUser( users, question.author )
+        
         const avatarURL = author.avatarURL
         const name = author.name        
 
@@ -34,9 +29,8 @@ class QuestionAnswerPage extends Component {
         const percentOne = (question.optionOne.votes.length / totalVotes) * 100
         const percentTwo = (question.optionTwo.votes.length / totalVotes) * 100
 
-        const authedUserInfo = users.find (
-            (user) => (  user.id  === authedUser )
-        )
+        const authedUserInfo = getUser (users, authedUser)
+        
         const authedUserAnswers = authedUserInfo.answers
         const authedUserVote = authedUserAnswers[qid]
         console.log ('QuestionAnswerPage:render', authedUserVote)
@@ -65,9 +59,6 @@ class QuestionAnswerPage extends Component {
                                 {authedUserVote && authedUserVote==="optionTwo" && (<p><b>Your vote!!</b></p>)}
                                 <input readOnly type="range" min="0" max="100" value={percentTwo}/>
                             </div>
-                            <span>
-                                Current user voted
-                            </span>
                         </div>             
                     </div>
                 </div>

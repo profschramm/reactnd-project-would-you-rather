@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
-import { convertToArray } from '../utils/helpers'
+import { convertToArray, getUser } from '../utils/helpers'
 
 //export default function Nav() {  // Changed to a Component, to pass along prop:username 
 class Nav extends Component {
@@ -43,9 +43,7 @@ class Nav extends Component {
 
 function mapStateToProp({authedUser, users}) {
  
-    const userInfo = convertToArray(users).find (
-      (user) => ( user.id  === authedUser )
-    )  
+    const userInfo = getUser( convertToArray(users), authedUser ) 
     return {
       authedUser,
       username: userInfo.name,

@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { handleSaveQuestionAnswer } from '../actions/shared'
 import { Redirect, withRouter } from 'react-router-dom'
 import Nav from './Nav'
-import { convertToArray } from '../utils/helpers';
+import { convertToArray, getUser, getQuestion } from '../utils/helpers';
 import RedirectLogin from './RedirectLogin'
 
 class QuestionPage extends Component { 
@@ -50,17 +50,11 @@ class QuestionPage extends Component {
             //return <Redirect to='/questions/${qid}' />
         }
         
-        const question = questions.find (
-            (question) => (   // () are an implicit return rather than explicit return {}
-                question.id  === qid
-            )
-        ) 
+        const question = getQuestion( questions, qid )
         if (!question || question === null) {
             return <p> This question does not exist. 404 page</p>
         }
-        const author = users.find (
-            (user) => (  user.id  === question.author )
-        )
+        const author = getUser (users, question.author)
         const avatarURL = author.avatarURL
         const name = author.name
 

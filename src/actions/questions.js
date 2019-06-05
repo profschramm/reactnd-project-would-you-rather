@@ -4,7 +4,7 @@ import { showLoading, hideLoading } from 'react-redux-loading'
 export const GET_QUESTIONS = 'GET_QUESTIONS'
 export const ADD_QUESTION = 'ADD_QUESTION'
 
-function addQuestion (question) {   // Should I export?? Not for optimistic-update.  Yes for now
+function addQuestion (question) {   // NB. Not exported. Not for optimistic-update.  Yes for now
     return {
         type: ADD_QUESTION,
         question,

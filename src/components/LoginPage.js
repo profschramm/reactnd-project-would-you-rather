@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { setAuthedUser } from '../actions/authedUser'
-import { convertToArray } from '../utils/helpers';
+import { convertToArray, getUser } from '../utils/helpers';
 import { Redirect} from 'react-router-dom'
 
 class LoginPage extends Component {
@@ -22,6 +22,7 @@ class LoginPage extends Component {
         if (e.target.value === "default") {
             alert('You must select a user')
         } else {
+            const user = getUser( this.props.users, this.state.selectedUser )
             const {dispatch} = this.props
             dispatch(setAuthedUser(this.state.selectedUser))
             this.setState( () => ({
