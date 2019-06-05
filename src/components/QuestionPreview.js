@@ -33,7 +33,13 @@ class QuestionPreview extends Component {
         const url = this.props.viewDetailsURL.concat(`/${qid}`)
         return (
             <div className='question-info'>
-                <span> Asked by {userInfo.name}: </span>
+                <span> Asked by {userInfo.name}:  
+                    <img
+                    src= {userInfo.avatarURL}
+                    alt= {`Avatar of ${userInfo.name}`}            
+                    className='avatar'
+                    />
+                </span>
                 <div>Would you rather {question.optionOne.text}
                 <Link to={url}>
                     <button>View Details</button>

@@ -7,7 +7,7 @@ import { convertToArray, getUser } from '../utils/helpers'
 class Nav extends Component {
 
     render () {
-        // const {authedUser, username, userAvatarURL} = this.props
+
         return (
             <nav className='nav'>
                  <ul>
@@ -28,6 +28,11 @@ class Nav extends Component {
                      </li>
                      <li>
                          <label>Hello {this.props.username}</label>
+                         <img
+                                    src= {this.props.userAvatarURL}
+                                    alt= {`Avatar of ${this.props.username}`}            
+                                    className='avatar'
+                         />
                      </li>
                      <li>
                          <NavLink to='/login' activeClassName='active'>
@@ -47,7 +52,7 @@ function mapStateToProp({authedUser, users}) {
     return {
       authedUser,
       username: userInfo.name,
-      userAvatarURL: userInfo.userAvatarURL
+      userAvatarURL: userInfo.avatarURL
     }
   }
   export default connect(mapStateToProp)(Nav)
