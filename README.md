@@ -10,14 +10,13 @@ The `_DATA.js` file represents a fake database and methods that let you access t
 
 # TBD Known Deficiencies
 
-1 Make the vote of the user clearer and prettier
-2 Add Avatar to NavLink header
-3 Modularity: Nav is imported into every Page.  Instead, have one Nav at App.js 
+1 Learn CSS and make everything pretty! Example: the vote of the user on an answered question
+2 Modularity: Nav is imported into every Page.  Instead, have one Nav at App.js 
              that is inherited by all the pages. Tried with "nested Routes" but
              was unsuccessful
       Note: I tried following this URL for including a header on every page with "withRouter"  # https://stackoverflow.com/questions/53539314/what-is-withrouter-for-in-react-router-dom
 
-4 Modify the Store to include the username and avatar as well, to avoid constant lookup
+3 Modify the Store to include the username and avatar as well, to avoid constant lookup
 
 ## Dependencies
 
