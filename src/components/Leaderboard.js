@@ -54,12 +54,10 @@ class Leaderboard extends Component {
                                 />
                                 <h2>{user.name}</h2>
                                 <div className="user">
-                                    <label>
-                                        Answered Questions {user.answered}
-                                    </label>
-                                    <label>
-                                    Created Questions {user.created}
-                                    </label> 
+                                    <ul>
+                                       <li>Answered Questions {user.answered}</li>
+                                       <li>Created Questions {user.created}</li>
+                                    </ul> 
                                 </div>
                                 <div className="user">
                                     Score {user.score}
@@ -80,3 +78,14 @@ function mapStateToProps({ authedUser, users }) {
     }
 }
 export default connect(mapStateToProps)(Leaderboard)
+
+/*
+                                <div className="user">
+                                    <label>
+                                        Answered Questions {user.answered}
+                                    </label>
+                                    <label>
+                                    Created Questions {user.created}
+                                    </label> 
+                                </div>
+*/
