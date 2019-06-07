@@ -48,10 +48,10 @@ class App extends Component {
               <Route path='/question/:question_id' render={ () => (<QuestionPage />)}/>
               <Route path='/questions/:question_id' render={ () => (<QuestionAnswerPage />)}/>
               <Route path='/leaderboard' exact render={ () => (<Leaderboard />)}/>
-              <Route path="*" component={Page404}/>
+              <Route path='/404' component={Page404}/>
           </Switch>
           </div>
-          <Route path='/login' exact render={ ( {history}) => (<LoginPage />)}/>
+          <Route path='/login' exact render={ ( {history}) => (<LoginPage onLogin={()=>{history.goBack()}}/>)}/>
         </Router>
       </div>    
     );

@@ -17,7 +17,7 @@ class Page404 extends Component{
             // this.props.history.push('/')
     
             <div>
-                <p> This is a 404 Page. No match for <code>{location.pathname}</code></p>
+                <p> This is MY 404 page.  No match for <code>{location.pathname}</code></p>
                 <Link to='/login'>
                     Login
                 </Link>

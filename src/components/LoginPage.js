@@ -29,6 +29,7 @@ class LoginPage extends Component {
                 toHomePage: this.state.selectedUser === null ? false : true
             }))
         }
+        this.props.onLogin()
     }
     render() {
         const { users } = this.props
