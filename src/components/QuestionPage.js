@@ -41,7 +41,12 @@ class QuestionPage extends Component {
     render() {
 
         const { authedUser, users, questions, qid } = this.props  
-        if (authedUser === null) { 
+
+        const question = getQuestion( questions, qid )
+        if (!question || question === null) {
+            return <Redirect to="/404" />
+        }
+        if (authedUser === null) { // Must be logged in.
             return <RedirectLogin/>
         }
         if (this.state.toNextPage === true) { // Redirect if submitted
@@ -50,10 +55,7 @@ class QuestionPage extends Component {
             //return <Redirect to='/questions/${qid}' />
         }
         
-        const question = getQuestion( questions, qid )
-        if (!question || question === null) {
-            return <p> This question does not exist. 404 page</p>
-        }
+ 
         const author = getUser (users, question.author)
         const avatarURL = author.avatarURL
         const name = author.name

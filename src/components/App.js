@@ -48,7 +48,7 @@ class App extends Component {
               <Route path='/question/:question_id' render={ () => (<QuestionPage />)}/>
               <Route path='/questions/:question_id' render={ () => (<QuestionAnswerPage />)}/>
               <Route path='/leaderboard' exact render={ () => (<Leaderboard />)}/>
-              <Route compoment={Page404}/>
+              <Route path="*" component={Page404}/>
           </Switch>
           </div>
           <Route path='/login' exact render={ ( {history}) => (<LoginPage />)}/>

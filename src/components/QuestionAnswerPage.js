@@ -51,7 +51,7 @@ class QuestionAnswerPage extends Component {
                             <div className='question'>
                                 Would you rather {question.optionOne.text} ?  
                                 <div> 
-                                    {question.optionOne.votes.length} out of {totalVotes} ({percentOne})
+                                    {question.optionOne.votes.length} out of {totalVotes} ({percentOne}%)
                                     {authedUserVote && authedUserVote==="optionOne" && (<p><b>Your vote!!</b></p>)}
                                     <input readOnly type="range" min="0" max="100" value={percentOne}/>
                                 </div>
@@ -60,7 +60,7 @@ class QuestionAnswerPage extends Component {
                             <div className='question'>
                                 Would you rather {question.optionTwo.text} ?
                                 <div className='question'>
-                                     {question.optionTwo.votes.length} out of {totalVotes} ({percentTwo})
+                                     {question.optionTwo.votes.length} out of {totalVotes} ({percentTwo}%)
                                     {authedUserVote && authedUserVote==="optionTwo" && (<p><b>Your vote!!</b></p>)}
                                     <input readOnly type="range" min="0" max="100" value={percentTwo}/>
                                 </div>
