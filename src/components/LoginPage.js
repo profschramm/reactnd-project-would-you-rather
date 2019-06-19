@@ -36,7 +36,8 @@ class LoginPage extends Component {
         console.log("LoginPage: render props", users)
 
         if (this.state.toHomePage === true) { // Redirect if submitted
-            return <Redirect to='/' />
+           //  return <Redirect to='/' />
+           this.props.onLogin()
         }
 
         return (

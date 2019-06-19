@@ -17,7 +17,7 @@ class Page404 extends Component{
             // this.props.history.push('/')
     
             <div>
-                <p> This is MY 404 page.  No match for <code>{location.pathname}</code></p>
+                <p> This is MY 404 page. </p>
                 <Link to='/login'>
                     Login
                 </Link>
@@ -27,3 +27,7 @@ class Page404 extends Component{
     
 }
 export default Page404
+
+/*
+                <p> This is MY 404 page.  No match for <code>{location.pathname}</code></p>
+*/

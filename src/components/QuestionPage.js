@@ -44,7 +44,8 @@ class QuestionPage extends Component {
 
         const question = getQuestion( questions, qid )
         if (!question || question === null) {
-            return <Redirect to="/404" />
+            //return <Redirect to="/404" />
+            return <RedirectLogin/>
         }
         if (authedUser === null) { // Must be logged in.
             return <RedirectLogin/>

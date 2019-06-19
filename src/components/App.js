@@ -12,15 +12,16 @@ import NewQuestionPage from './NewQuestionPage'
 import QuestionPage from './QuestionPage'
 import QuestionAnswerPage from './QuestionAnswerPage'
 import Leaderboard from './Leaderboard'
-
+import Page404 from './Page404'
 
 // Attribution URL: https://medium.com/@leonardobrunolima/react-tips-handling-404-pages-24d27191a8dd
+/*
 const Page404 = ({location}) => (
   <div>
-    <h2>No match found for <code>{location.pathname}</code></h2>
+    <h2>404. No match found</h2>
   </div>
 )
-
+*/
 class App extends Component {
 
   componentDidMount() {
@@ -48,7 +49,7 @@ class App extends Component {
               <Route path='/question/:question_id' render={ () => (<QuestionPage />)}/>
               <Route path='/questions/:question_id' render={ () => (<QuestionAnswerPage />)}/>
               <Route path='/leaderboard' exact render={ () => (<Leaderboard />)}/>
-              <Route path='/404' component={Page404}/>
+              <Route path='/404' render={ () => (<Page404 />)}/>
           </Switch>
           </div>
           <Route path='/login' exact render={ ( {history}) => (<LoginPage onLogin={()=>{history.goBack()}}/>)}/>
@@ -66,7 +67,16 @@ function mapStateToProp({users}) {
 export default connect(mapStateToProp)(App)
 
 /*
+              <Route path='/404' component={Page404}/>
+*/
 
+
+/* For 404 page
+    <h2>No match found for <code>{location.pathname}</code></h2>
+
+*/
+
+/*
 Original/Alternative: <Route path='/' exact component={LoginPage} />
    - Does not allow inclusion of props.
 
