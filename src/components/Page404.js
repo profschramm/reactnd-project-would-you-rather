@@ -14,12 +14,13 @@ class Page404 extends Component{
 
     render () {
         return (
-            // this.props.history.push('/')
-    
             <div>
                 <p> This is MY 404 page. </p>
                 <Link to='/login'>
-                    Login
+                    Login  
+                </Link>
+                <Link to='/'>
+                    Home  
                 </Link>
             </div>
         )

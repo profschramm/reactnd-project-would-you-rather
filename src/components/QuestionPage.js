@@ -44,10 +44,15 @@ class QuestionPage extends Component {
 
         const question = getQuestion( questions, qid )
         if (!question || question === null) {
+            //Eduardo: Next line is trying to get Login to redirect to 404.
+            //this.props.history.push('/404')
+            this.props.history.replace ( {pathname: '/404'})
             //return <Redirect to="/404" />
-            return <RedirectLogin/>
+            //return <RedirectLogin/>
+            return <Redirect to="/login" />
+            //return <p> This question does not exist. 404 page</p>
         }
-        if (authedUser === null) { // Must be logged in.
+        if (authedUser === null) { // Must be logged in
             return <RedirectLogin/>
         }
         if (this.state.toNextPage === true) { // Redirect if submitted
