@@ -43,14 +43,11 @@ class QuestionPage extends Component {
         const { authedUser, users, questions, qid } = this.props  
 
         const question = getQuestion( questions, qid )
-        if (!question || question === null) {
-            //Eduardo: Next line is trying to get Login to redirect to 404.
-            //this.props.history.push('/404')
-            this.props.history.replace ( {pathname: '/404'})
-            //return <Redirect to="/404" />
-            //return <RedirectLogin/>
-            return <Redirect to="/login" />
-            //return <p> This question does not exist. 404 page</p>
+        if (!question || question === null) {  // If question does not exist, redirect to Login->404
+            console.log ("QuestionPage:render", this.props.location)
+            // Original copied code, but don't want to come back to this page. Want to go to 404 page
+           //return <Redirect to={{ pathname: "/login", state:{ from: this.props.location}}}  /> 
+            return <Redirect to={{ pathname: "/login", state:{ from: {pathname: "/404"}}}}  />
         }
         if (authedUser === null) { // Must be logged in
             return <RedirectLogin/>
@@ -58,7 +55,7 @@ class QuestionPage extends Component {
         if (this.state.toNextPage === true) { // Redirect if submitted
             const url = "/questions".concat(`/${qid}`)
             return <Redirect to={url} />
-            //return <Redirect to='/questions/${qid}' />
+            //return <Redirect to='/questions/${qid}' />  Could not get this syntax to work. Broke into two statements
         }
         
  

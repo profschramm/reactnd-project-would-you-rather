@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { setAuthedUser } from '../actions/authedUser'
 import { convertToArray } from '../utils/helpers';
+import { Redirect } from 'react-router-dom'
 
 class LoginPage extends Component {
 
@@ -32,11 +33,16 @@ class LoginPage extends Component {
     }
     render() {
         const { users } = this.props
-        console.log("LoginPage: render props", users)
 
         if (this.state.toHomePage === true) { // Redirect if submitted
-           //  return <Redirect to='/' />
-           this.props.onLogin()
+            // URL: https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/api/Redirect.md
+            // URL: https://reacttraining.com/react-router/web/example/auth-workflow
+            const dummy = false
+            let {from} = !this.props.location ? {from: {pathname:"/"}} : this.props.location.state
+            // Original copied code, but location is undefined, so state can't be accessed.
+            //let {from} = this.props.location.state || {from: {pathname:"/"}}
+           // return <Redirect to='/' />
+           return <Redirect to={from} />
         }
 
         return (
